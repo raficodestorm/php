@@ -29,7 +29,14 @@ var_dump ($p);
 var_dump ($f);
 
 /*==========================================
-                Array 
+                function
 ==========================================*/
-$student = ["name"]
+$many = function($sm, $sn) {
+    return $sm + $sn;
+};
+$many(2, 3);
+
+
+$info= fn() => "Hello";
+echo $info();
 ?>

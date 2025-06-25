@@ -64,9 +64,21 @@ echo $fruits[0];
                Associative array
 ==========================================*/
 $person = array (
-    ""
-)
+    "Name" => "Rafi",
+    "age" => "26",
+    )
+/*==========================================
+            Multidimantional  array
+==========================================*/
+$men = array(
+    array("name" => "Rafi", "age" => 26),
+    array("name" => "Rasel", "age" => 35),
+    array("name" => "Rana", "age" => 26),
+);
 
+print_r($men);
+
+echo $men[1];
 
 
 ?>

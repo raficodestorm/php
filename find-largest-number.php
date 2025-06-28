@@ -3,7 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>find </title>
+    <title>find latgest </title>
+    <style>
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+    </style>
 </head>
 <body>
     <div>
@@ -13,7 +21,7 @@
             <input type="number" name="num3" placeholder="Enter 3rd number" required/><br><br>
             <input type="submit" value="find largest number"><br><br><br>
         </form>
-    </div>
+    
     <?php
     if($_SERVER["REQUEST_METHOD"] == "POST") {
         $a = $_POST['num1'];
@@ -29,5 +37,6 @@
         }
     };
     ?>
+    </div>
 </body>
 </html>

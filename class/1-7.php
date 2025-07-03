@@ -17,6 +17,9 @@ class tool extends table{
         return $age;
     }
 }
+A quick brown fox jumps over the lazy dog 
+A quick brown fox jumps over the lazy dog 
+A quick brown fox jumps over the lazy dog 
 
 $nam = new tool();
 echo $nam->shine();

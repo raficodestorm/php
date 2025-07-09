@@ -16,6 +16,8 @@ $janan->name = "mama";
 $janan->age = 25;
 echo $janan->show();
 
-
+A quick broun fox jumps over the lazy dog 
+A quick brown fox jumps over the lazy dog 
+A quick brown fox jumps over the
 
 ?>

@@ -3,30 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Login</title>
     <style>
         body{
-            display: felx;
+            display: flex;
             justify-content: center;
             align-items: center;
-            background-color: blue;
-            
             height: 100vh;
         }
-   
+        .main{
+            width: auto;
+            height: auto;
+            padding: 15px;
+            border: 2px solid rgb(2, 2, 55);
+        }
+        .head{
+            width: 100%;
+            height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgb(2, 2, 55);
+        }
+        p{
+            display: inline-block;
+            color: rgb(7, 135, 7);
+            font-size: 45px;
+            
+        }
+        img{
+            width: 70px;
+            height: 70px;
+        }
+        .field{
+            width: 250px;
+            height: 30px;
+        }
+        .btnlogin{
+            background-color: rgb(2, 2, 55);
+            color: white;
+            width: 100%;
+            font-size: 20px;
+        }
 
     </style>
 </head>
 <body>
-    <div>
-    <form action="" method="POST">
-        username: <input class="field" type="text" name="username">
+    <div class="main">
+        <div class="head">
+            <!-- <img src="image/Rafi's-Logo.png" alt="RAfi"> -->
+            <p>~No-Star~</p>
+        </div>
         <br>
-        password: <input class="field" type="password" name="pass">
+    <form action="" method="POST">
+        Username: <input class="field" type="text" name="username">
+        <br><br>
+        Password : <input class="field" type="password" name="pass">
         <br><br>
         <input class="btnlogin" type="submit" value="Login" name="submit">
     </form>
-    
+    </div>
 
     <?php
     if(isset($_POST["submit"])){
@@ -44,6 +80,6 @@
         }
     }
     ?>
-    </div>
+    
 </body>
 </html>

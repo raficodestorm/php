@@ -1,3 +1,3 @@
 <?php
-echo "<h1>Keno ekhane ashle vai!</h1>";
+echo "<h1>Welcome to No-Star</h1>";
 ?>

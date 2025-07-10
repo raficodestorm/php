@@ -2,9 +2,37 @@
 <html>
 <head>
     <title>OOP User Form</title>
+    <style>
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: rgb(202, 203, 204);
+            
+        }
+        .div1{
+            width: auto;
+            height: auto;
+            border-radius: 20px;
+            background-color: white;
+            padding: 20px;
+        }
+        .div2{
+            width: 180px;
+            height: auto;
+            margin-left: 30px;
+        }
+        .btn{
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
+    <div class="div1">
     <h2>User Information Form</h2>
+    
+    <div class="div2">
     <form action="save.php" method="POST">
         <label>Name:</label><br>
         <input type="text" name="name" required><br><br>
@@ -12,10 +40,12 @@
         <label>ID:</label><br>
         <input type="text" name="id" required><br><br>
 
-        <label>Address:</label><br>
-        <textarea name="address" required></textarea><br><br>
+        <label>Batch:</label><br>
+        <input type="text" name="address" required><br><br>
 
-        <input type="submit" value="Submit">
+        <input class="btn" type="submit" value="Submit">
     </form>
+    </div>
+    </div>
 </body>
 </html>

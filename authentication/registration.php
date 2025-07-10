@@ -23,7 +23,9 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: rgb(2, 2, 55);
+            background-color: rgb(220, 224, 224);
+            border: 2px solid rgb(2, 2, 55);
+        
         }
         p{
             display: inline-block;
@@ -40,10 +42,12 @@
             height: 30px;
         }
         .btnlogin{
-            background-color: rgb(2, 2, 55);
-            color: white;
+            background-color: rgb(220, 224, 224);
             width: 100%;
             font-size: 20px;
+            border: none;
+            border: 2px solid rgb(2, 2, 55);
+        
         }
 
     </style>
@@ -52,7 +56,7 @@
     <div>
 <div class="main">
         <div class="head">
-            <!-- <img src="image/Rafi's-Logo.png" alt="RAfi"> -->
+            <img src="image/no-star.png" alt="RAfi">
             <p>~No-Star~</p>
         </div>
         <br>

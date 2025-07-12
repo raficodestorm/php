@@ -7,7 +7,39 @@
     <style>
         body{
             color: rgb(220, 224, 224);
+            text-shadow: aliceblue;
+            flex-direction: column;
+            box-shadow: 0 0 10px #aaaaaa70;
         }
+        .main::before{
+            content: '';
+            background-image: conic-gradient(
+                rgb(96, 228, 243) 20deg
+                transparent 10deg
+            );
+            height: 150%;
+            width: 150%;
+            position: absolute;
+            left: -25%;
+            top: -25%;
+            animation: rotate 2s infinite linear;
+        }
+        @keyframes rotate{
+            100%{
+                transform: rotate(-360deg);
+            }
+        }
+        .main::after{
+            content: '';
+            height: 94%;
+            width: 94%;
+            position: absolute;
+            background-color: #aaaaaa70;
+            border-radius: 10PX;
+            
+
+        }
+    
     </style>
 </head>
 <body>
@@ -15,5 +47,6 @@
         <input type="text" maxlength="5">
         <input type="submit" value="submit">
     </form>
+    <div class="main"></div>
 </body>
 </html>

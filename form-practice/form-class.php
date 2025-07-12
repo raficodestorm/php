@@ -5,26 +5,17 @@ class Student {
     private $batch;
 
     public function __construct($id, $name, $batch) {
-        $this->setId($id);
-        $this->setName($name);
-        $this->setBatch($batch);
-    }
-
-    private function setId($id) {
         $this->id = trim($id);
-    }
-
-    private function setName($name) {
         $this->name = htmlspecialchars(trim($name));
-    }
-
-    private function setBatch($batch) {
         $this->batch = trim($batch);
     }
 
+    public function dataFormat() {
+        return "{$this->id},{$this->name},{$this->batch}" . PHP_EOL;
+    }
+
     public function saveToFile($filename) {
-        $data = "{$this->id},{$this->name},{$this->batch}\n";
-        file_put_contents($filename, $data, FILE_APPEND);
+        file_put_contents($filename, $this->dataFormat(), FILE_APPEND);
     }
 
     public static function displayStudents($filename) {
@@ -33,9 +24,9 @@ class Student {
             return;
         }
 
-        $rows = file($filename, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+        $lines = file($filename, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 
-        echo <<<TABLE
+        echo <<<HTML
         <style>
             table {
                 border-collapse: collapse;
@@ -64,17 +55,21 @@ class Student {
                 </tr>
             </thead>
             <tbody>
-        TABLE;
+        HTML;
 
-        foreach ($rows as $student) {
-            list($id, $name, $batch) = explode(",", trim($student));
+        foreach ($lines as $line) {
+            list($id, $name, $batch) = explode(",", trim($line));
             $id = htmlspecialchars($id);
             $name = htmlspecialchars($name);
             $batch = htmlspecialchars($batch);
-            echo "<tr><td>{$id}</td><td>{$name}</td><td>{$batch}</td></tr>";
+            echo "<tr>
+                    <td>{$id}</td>
+                    <td>{$name}</td>
+                    <td>{$batch}</td>
+                </tr>";
         }
 
-        echo "</tbody></table>";
+        echo "</tbody> </table>";
     }
 }
 ?>

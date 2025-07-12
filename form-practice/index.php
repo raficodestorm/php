@@ -1,24 +1,4 @@
-<?php session_start();
- ?>
-<?php
-require_once 'student_class.php';
 
-$message = '';
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    try {
-        $student = new Student(
-            $_POST['id'],
-            $_POST['name'],
-            $_POST['batch'],
-        );
-        $student->saveToFile("data.txt");
-        $message = "Student data saved successfully.";
-    } catch (Exception $e) {
-        $message = "Error: " . $e->getMessage();
-    }
-}
-?>
 
 
 <!DOCTYPE html>
@@ -66,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         input[type="submit"] {
             width: 100%;
-            background: #007BFF;
+            background:#4a4e69;
             color: #fff;
             border: none;
             padding: 12px;
@@ -77,15 +57,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         input[type="submit"]:hover {
-            background: #0056b3;
+            background:#22223b;
         }
 
         .message {
             text-align: center;
+            font-style: italic;
             padding: 10px;
-            background: #d4edda;
+            background:rgb(196, 242, 241);
             color: #155724;
-            border: 1px solid #c3e6cb;
+            border: 1px solidrgb(195, 196, 230);
             border-radius: 4px;
             margin-bottom: 20px;
         }
@@ -97,6 +78,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </style>
 </head>
 <body>
+    <?php require_once 'class-to-obj.php'; ?>
+    <?php require_once 'form-class.php'; ?>
+
 
 <div class="container">
     <h2>Student Registration Form</h2>
@@ -115,13 +99,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <label>Batch:</label>
         <input type="text" name="batch" placeholder="Enter Batch" required>
 
-        <input type="submit" value="Submit">
+        <input type="submit" value="Submit" name="submit">
     </form>
 </div>
 
 <div class="table-wrapper">
     <?php Student::displayStudents("data.txt"); ?>
 </div>
+
+
 
 </body>
 </html>

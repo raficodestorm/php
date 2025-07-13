@@ -70,41 +70,46 @@
     </style>
 </head>
 <body>
-    <div>
+    
 <div class="main">
         <div class="head">
     <form action="" method="POST">
         <h2>Registration Form</h2>
         <div class="pop">
+        <label>Fullname:</label><br> 
+        <input class="field" type="text" name="fullname" required>
+        <br><br>
         <label>Username:</label><br> 
         <input class="field" type="text" name="username" required>
         <br><br>
         <label>Password:</label><br>
         <input class="field" type="password" name="password" required>
         <br><br>
-        <input class="btnlogin" type="submit" name="submit">
-        <br><br><br>
-        <a href="login.php"><input class="btn" type="button" name="" value="LOGIN"></a>
-        </div>
-    </form>
-    </div>
-</div>
+        <label>Repeat Password:</label><br>
+        <input class="field" type="password" name="password2" required>
+        
+        
+    
 
     <?php
 
 class UserReg {
-    public $name;
+    public $fullname;
+    public $username;
     public $password;
+    public $password2;
     public $file;
 
-    public function __construct($name, $pass, $file="data.txt"){
-        $this->name = $name;
+    public function __construct($fullname, $username, $pass, $pass2, $file="data.txt"){
+        $this->fullname = $fullname;
+        $this->username = $username;
         $this->password = $pass;
+        $this->password2 = $pass2;
         $this->file = $file;
     }
 
     public function formData(){
-        return "$this->name | $this->password".PHP_EOL;
+        return "$this->fullname | $this->username | $this->password | $this->password2".PHP_EOL;
     }
 
     public function formSave(){
@@ -115,17 +120,30 @@ class UserReg {
 }
 
 if($_SERVER['REQUEST_METHOD'] == "POST"){
-    if(isset($_POST["username"], $_POST["password"])){
+    if(isset($_POST['fullname'], $_POST["username"], $_POST["password"], $_POST['password2'])){
+    $fullname = $_POST['fullname'];
     $username = $_POST['username'];
     $password = $_POST['password'];
-
-    $userInfo = new UserReg($username, $password);
+    $password2 = $_POST['password2'];
+    if($password == $password2) {
+    $userInfo = new UserReg($fullname, $username, $password, $password2);
     $userInfo->formSave();
+    }else{
+        echo "<p style='color:red;'>Password does not match</p>";
+    }
 } else {
     echo "Invalid data";
 }
 }
     ?>
+    
+        <br>
+        <input class="btnlogin" type="submit" name="submit">
+        <br><br><br>
+        <a href="login.php"><input class="btn" type="button" name="" value="LOGIN"></a>
+        </div>
+    </form>
     </div>
+</div>
 </body>
 </html>

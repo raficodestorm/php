@@ -2,16 +2,16 @@
 class Student {
     private $id;
     private $name;
-    private $batch;
+    private $email;
 
-    public function __construct($id, $name, $batch) {
+    public function __construct($id, $name, $email) {
         $this->id = trim($id);
         $this->name = htmlspecialchars(trim($name));
-        $this->batch = trim($batch);
+        $this->email = trim($email);
     }
 
     public function dataFormat() {
-        return "{$this->id},{$this->name},{$this->batch}" . PHP_EOL;
+        return "{$this->id},{$this->name},{$this->email}" . PHP_EOL;
     }
 
     public function saveToFile($filename) {
@@ -51,21 +51,21 @@ class Student {
                 <tr>
                     <th>ID</th>
                     <th>Name</th>
-                    <th>Batch</th>
+                    <th>Email</th>
                 </tr>
             </thead>
             <tbody>
         HTML;
 
         foreach ($lines as $line) {
-            list($id, $name, $batch) = explode(",", trim($line));
+            list($id, $name, $email) = explode(",", trim($line));
             $id = htmlspecialchars($id);
             $name = htmlspecialchars($name);
-            $batch = htmlspecialchars($batch);
+            $email = htmlspecialchars($email);
             echo "<tr>
                     <td>{$id}</td>
                     <td>{$name}</td>
-                    <td>{$batch}</td>
+                    <td>{$email}</td>
                 </tr>";
         }
 

@@ -96,8 +96,8 @@
         <label>Name:</label>
         <input type="text" name="name" placeholder="Enter Name" required>
 
-        <label>Batch:</label>
-        <input type="text" name="batch" placeholder="Enter Batch" required>
+        <label>Email:</label>
+        <input type="text" name="email" placeholder="Enter email" required>
 
         <input type="submit" value="Submit" name="submit">
     </form>

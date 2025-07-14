@@ -5,11 +5,10 @@ if(isset($_FILES['img'])){
     $filesize = $_FILES['img']['size'];
     $tmp_name = $_FILES['img']['tmp_name'];
     $filesize = $filesize/1024;
-    if($filesize>500){
-        echo "file is too larg";
-    }else{
-    move_uploaded_file($tmp_name, "image/".$filename);
-}
+
+    if($filesize<500 && $filetype== 'image/png'){
+          move_uploaded_file($tmp_name, "image/".$filename);
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -71,10 +70,14 @@ if (!empty($filename)) {
     <h4 style="color: gray;">Details</h4>
     <?php
     if(isset($_POST['submit'])){
+        if(!($filesize<500 && $filetype== 'image/png')){
+         echo "invalid file";
+    }else{
     echo "<p>File name: $filename</p>";
     echo "<p>File type: $filetype</p>";
     echo "<p>File size: $filesize kb</p>";
     } 
+}
     ?>
 </div>
 </body>

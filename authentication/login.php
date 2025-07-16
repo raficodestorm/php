@@ -91,13 +91,14 @@
             list($userName, $passWord) = explode(" | ", $tile);
 
             if($userName == $username && $passWord == $pass){
+                
                 $_SESSION['username'] = $username;
                 header("location: jaw.php");
                 exit;
-            }else{
-                echo "Username or Password is incorrect!";
             }
         }
+
+        echo "Username or Password is incorrect!";
         
         
     }

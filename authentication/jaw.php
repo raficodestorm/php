@@ -89,7 +89,7 @@ if (isset($_POST['logout'])) {
         <p class="greet">Hello, <?php echo htmlspecialchars($_SESSION['username']); ?>!</p>
         <p class="well">Welcome to IsDB-BISEW!</p>
         <form method="POST" enctype="multipart/form-data">
-            <p>Upload your file:</p>
+            <h3>Upload your file:</h3>
             <input type="file" name="img">
             <input type="submit" name="submit">
             <br><br>
@@ -97,7 +97,7 @@ if (isset($_POST['logout'])) {
         <h4 style="color: gray;">Your uploaded file</h4>
     <?php
 if (!empty($filename)) {
-    echo "<img style='width:120px; height:100px;' src='image/$filename'>";
+    echo "<img style='width:150px; height:100px;' src='image/$filename'>";
 }
 ?>
 </div>

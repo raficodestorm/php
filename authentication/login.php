@@ -88,7 +88,9 @@
         $file = file("data.txt");
 
         foreach($file as $tile){
-            list($userName, $passWord) = explode(" | ", $tile);
+            $parts = explode(" | ", trim($tile));
+            if(count($parts) === 4){
+            list($fullName, $userName, $passWord, $confirmPass) = $parts;
 
             if($userName == $username && $passWord == $pass){
                 
@@ -97,6 +99,7 @@
                 exit;
             }
         }
+    }
 
         echo "Username or Password is incorrect!";
         

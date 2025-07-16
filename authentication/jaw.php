@@ -37,19 +37,29 @@ if (isset($_POST['logout'])) {
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            padding-top: 100px;
-            
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
         }
         .container {
             background-color: #38040e;
             padding: 30px;
             margin: auto;
-            width: 700px;
+            width: 650px;
             border-radius: 10px;
             box-shadow: 0 0 10px #aaaaaa75;
             color: #ffb3c1;
             position: relative;
-        
+        }
+        .subcont{
+            width: 700px;
+            height: auto;
+            padding: 5px;
+            border: 3px solid #38040e;
+            margin-top: 20px;
+        }
         .logout-btn {
             margin-top: 20px;
             padding: 10px 20px;
@@ -92,7 +102,9 @@ if (isset($_POST['logout'])) {
             <h3>Upload your file:</h3>
             <input type="file" name="img">
             <input type="submit" name="submit">
-            <br><br>
+            <br>
+            </div>
+            <div class="subcont">
             <div class="img">
         <h4 style="color: gray;">Your uploaded file</h4>
     <?php
@@ -115,9 +127,10 @@ if (!empty($filename)) {
 }
     ?>
 </div>
+</div>
             <button class="logout-btn" type="submit" name="logout">Logout</button>
         </form>
-    </div>
+    
 
     
 </body>

@@ -18,7 +18,7 @@ class stud {
     }
 }
 class student extends stud{
-    public static function($filename){
+    public static function display($filename){
         if(!(file_exists($filename))){
             echo "data not found";
         }

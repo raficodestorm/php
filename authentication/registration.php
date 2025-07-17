@@ -13,8 +13,9 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color:rgb(224, 222, 221);
-            color: #ffb3c1;
+            background-image: url(image/cover2.jpg);
+            background-size: cover;
+            color: white;
         }
         .main{
             width: auto;
@@ -22,14 +23,14 @@
             padding: 25px;
             background-color: #38040e;
            border-radius: 10px;
-           box-shadow: 0 0 10px #aaaaaa75;
+           box-shadow: 0 0 10px #aaa;
             
         }
         .head{
             width: auto;
             height: auto;
             padding: 15px;
-            background-color: #250902;
+            background-color: black;
             box-shadow: inset 0 0 10px #aaaaaa70;
         }
         

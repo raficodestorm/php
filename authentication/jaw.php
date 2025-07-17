@@ -14,6 +14,7 @@ if(isset($_FILES['img'])) {
           move_uploaded_file($tmp_name, "image/".$filename);
     }
 }
+3.
 
 if (!isset($_SESSION['username'])) {
     header("Location: login.php");

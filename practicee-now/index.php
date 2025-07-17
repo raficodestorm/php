@@ -1,3 +1,5 @@
+<?php require_once "object-create.php" ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,7 +34,7 @@
     </div>
 
     <div class="table">
-
+        <?php  $student::display("data.txt") ?>;
     </div>
 </body>
 </html>

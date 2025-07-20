@@ -13,9 +13,8 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-image: url(image/cover2.jpg);
             background-size: cover;
-            color: white;
+            color: black;
         }
         .main{
             width: auto;
@@ -30,7 +29,7 @@
             width: auto;
             height: auto;
             padding: 15px;
-            background-color: black;
+            background-color: white;
             box-shadow: inset 0 0 10px #aaaaaa70;
         }
         

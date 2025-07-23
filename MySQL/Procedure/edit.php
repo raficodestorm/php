@@ -66,11 +66,11 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $ids = $_POST['ids'];
     $names = $_POST['names'];
     $emails = $_POST['emails'];
-    $connect = mysqli_connect("localhost", "root", "", "trainee_table");
+    $connect = mysqli_connect("localhost", "root", "", "trainee_fans");
     if(isset($_GET['eid'])){
         $eid = $_GET['eid'];
     
-        $edit = "UPDATE trainee_details SET id='$ids', Name='$names', email='$emails' WHERE id='$eid'";
+        $edit = "UPDATE trainee_fans SET id='$ids', Name='$names', email='$emails' WHERE id='$eid'";
     
         $get = mysqli_query($connect, $edit);
         if($get){

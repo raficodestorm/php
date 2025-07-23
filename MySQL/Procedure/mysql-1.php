@@ -17,7 +17,7 @@
 
 
 <?php
-$connect = mysqli_connect("localhost","root","","trainee_table");
+$connect = mysqli_connect("localhost","root","","trainee_fans");
 
 
 if(isset($_GET['delid'])){
@@ -106,7 +106,7 @@ if(isset($_GET['delid'])){
 
 
 <?php
-$table = $connect->query("select * from trainee_details");
+$table = $connect->query("select * from trainee_fans");
 while(list($id, $username,$email) =$table->fetch_row()){
     echo "
     <tr>

@@ -73,6 +73,7 @@
             <select name="company" id="">
                 <?php
                     $sel = $connect->query("select * from vendor");
+                    
                     while(list($name, $con)=$sel->fetch_row()){
                         echo"<option value='$name'>$name</option>";
                     }

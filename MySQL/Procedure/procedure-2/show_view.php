@@ -41,18 +41,19 @@
 <?php
 $connect = new mysqli("localhost", "root", "", "trainee_table");
 
-$query = "SELECT * FROM view_products";
+$query = "CALL view_productss";
 $result = $connect->query($query);
 
-if ($result->num_rows > 0) {
+if ($result) {
     echo "<table>
-    <tr><th>ID</th><th>Name</th><th>Price</th><th>Manufacturer ID</th></tr>";
+    <tr><th>ID</th><th>Name</th><th>Price</th><th>Manufacturer Name</th><th>Manufacturer ID</th></tr>";
 
     while($row = $result->fetch_assoc()) {
         echo "<tr>
-            <td>{$row['id']}</td>
+            <td>{$row['product_id']}</td>
             <td>{$row['name']}</td>
             <td>{$row['price']}</td>
+            <td>{$row['manufacturer_name']}</td>
             <td>{$row['manufacturer_id']}</td>
         </tr>";
     }

@@ -81,9 +81,28 @@ if (isset($_POST['psubmit'])) {
             height: 50px;
             background-color: black;
             color: gray;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         ul{
             position: relative;
+            list-style: none;
+        }
+        li{
+            display: inline-block;
+            padding: 5px 10px 5px 10px;
+            margin: 0 20px;
+        }
+        a{
+            text-decoration: none;
+            color: gray;
+            font-size: x-large;
+            padding: 5px 10px 5px 10px;
+        }
+        ul li a:hover{
+            color: white;
+            
         }
 
     </style>
@@ -92,10 +111,10 @@ if (isset($_POST['psubmit'])) {
     <nav>
         <div class="nav">
             <ul>
-                <li><a href="">Add product</a></li>
-                <li><a href="">Add vendor</a></li>
-                <li><a href="">view vendor</a></li>
-                <li><a href="">view product</a></li>
+                <li><a href="procedure12.php">Add product</a></li>
+                <li><a href="procedure12.php">Add vendor</a></li>
+                <li><a href="view-vendor.php">view vendor</a></li>
+                <li><a href="view-product.php">view product</a></li>
             </ul>
         </div>
     </nav>

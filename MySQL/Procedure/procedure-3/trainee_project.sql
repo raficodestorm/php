@@ -79,13 +79,4 @@ WHERE p.price > 5000;
 -- -----------------------------------------------------
 -- ✅ Optional Test Data (remove if you want a clean start)
 -- -----------------------------------------------------
-INSERT INTO manufacturer (name, address, contact)
-VALUES 
-('ABC Industries', 'Dhaka, Bangladesh', '017XXXXXXXX'),
-('XYZ Corp', 'Chittagong, Bangladesh', '018XXXXXXXX');
 
-INSERT INTO product (name, price, manufacturer_id)
-VALUES 
-('Luxury Laptop', 6500.00, 1),
-('Basic Mouse', 300.00, 1),
-('Premium Smartphone', 12000.00, 2);

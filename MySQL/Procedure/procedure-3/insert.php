@@ -56,7 +56,24 @@ if ($connect->connect_error) {
             font-size: larger;
             text-decoration: none;
             border-radius: 50%;
-            
+            animation: jigjag 5s linear infinite;
+        }
+        @keyframes jigjag {
+            0%{
+                background-color: blue;
+            }
+            40%{
+                background-color: rgb(207, 5, 238);
+            }
+            70%{
+                background-color: green;
+            }
+            100%{
+                background-color: rgb(186, 3, 165);;
+            }
+        }
+        a:hover{
+            animation: jigjag 0.1s linear infinite;
         }
         .under{
             margin-top: 100px;

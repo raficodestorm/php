@@ -47,6 +47,21 @@ if ($connect->connect_error) {
             color: white;
             border: none;
             cursor: pointer;
+            animation: jigjig 5s linear infinite;
+        }
+        @keyframes jigjig {
+            0%{
+                background-color: blue;
+            }
+            25%{
+                background-color: #8338ec;
+            }
+            50%{
+                background-color: blue;
+            }
+            95%{
+                background-color: #8338ec;
+            }
         }
         .message { margin: 10px 0; font-weight: bold; }
         a{

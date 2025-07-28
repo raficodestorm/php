@@ -77,6 +77,29 @@ INNER JOIN manufacturer m ON p.manufacturer_id = m.id
 WHERE p.price > 5000;
 
 -- -----------------------------------------------------
--- ✅ Optional Test Data (remove if you want a clean start)
+-- add table for deleted items
 -- -----------------------------------------------------
 
+CREATE TABLE deleted_product_log (
+    id INT,
+    name VARCHAR(100),
+    price DECIMAL(10,2),
+    manufacturer_id INT,
+    deleted_at DATETIME
+);
+
+-- -----------------------------------------------------
+-- add trigger
+-- -----------------------------------------------------
+
+DELIMITER //
+
+CREATE TRIGGER after_product_delete
+AFTER DELETE ON product
+FOR EACH ROW
+BEGIN
+    INSERT INTO deleted_product_log (id, name, price, manufacturer_id, deleted_at)
+    VALUES (OLD.id, OLD.name, OLD.price, OLD.manufacturer_id, NOW());
+END //
+
+DELIMITER ;

@@ -28,6 +28,28 @@
             color: white;
             text-decoration: none;
         }
+        .delete {
+    padding: 8px 16px;
+    background-color: #dc3545; /* Bootstrap danger red */
+    color: #fff;
+    border: none;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: inline-block;
+}
+
+.delete:hover {
+    background-color: #c82333;
+    transform: scale(1.05);
+}
+
+.delete:active {
+    transform: scale(0.97);
+    background-color: #a71d2a;
+}
     </style>
 </head>
 <body>
@@ -41,10 +63,26 @@ if ($connect->connect_error) {
     die("Connection failed: " . $connect->connect_error);
 }
 
+if (isset($_GET['delid'])) {
+    $del_id = intval($_GET['delid']);
+    $stmt = $connect->prepare("CALL delete_product_by_id(?)");
+    $stmt->bind_param("i", $del_id);
+    $stmt->execute();
+    $stmt->close();
+    // Redirect to prevent refresh-based repeat delete
+    header("Location: products_view.php");
+    exit;
+}
+
 $result = $connect->query("SELECT * FROM expensive_products");
 if ($result->num_rows > 0) {
     echo "<table><tr>
-        <th>ID</th><th>Name</th><th>Price</th><th>Manufacturer</th><th>Manufacturer ID</th>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Manufacturer</th>
+        <th>Manufacturer ID</th>
+        <th>Action</th>
     </tr>";
     while ($row = $result->fetch_assoc()) {
         echo "<tr>
@@ -53,6 +91,8 @@ if ($result->num_rows > 0) {
             <td>{$row['price']}</td>
             <td>{$row['manufacturer_name']}</td>
             <td>{$row['manufacturer_id']}</td>
+            <td><a class='delete' href='products_view.php?delid={$row['product_id']}' onclick='return confirm(\"Are you sure?\")'>delete</a></td>
+
         </tr>";
     }
     echo "</table>";

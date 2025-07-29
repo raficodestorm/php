@@ -116,3 +116,17 @@ BEGIN
 END //
 
 DELIMITER ;
+-- -----------------------------------------------------
+-- add trigger
+-- -----------------------------------------------------
+
+DELIMITER //
+
+CREATE TRIGGER after_manufacturer_delete
+AFTER DELETE ON product
+FOR EACH ROW
+BEGIN
+    DELETE FROM product WHERE manufacturer_id=OLD.id;
+END //
+
+DELIMITER ;

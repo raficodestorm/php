@@ -103,6 +103,7 @@ if (isset($_GET['delid'])) {
 }
 
 $connect->close();
+
 ?>
 
 </body>

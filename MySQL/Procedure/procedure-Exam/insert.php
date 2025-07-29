@@ -59,64 +59,57 @@ if ($connect->connect_error) {
             }
         }
         .message { margin: 10px 0; font-weight: bold; }
-        /* a{
-            padding: 30px 25px;
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        th {
+            background: #007bff;
+            color: #fff;
+        }
+        a{
+            padding: 8px 20px;
             background-color: blue;
             color: white;
-            font-size: larger;
             text-decoration: none;
-            border-radius: 50%;
-            animation: jigjag 5s linear infinite;
         }
-        @keyframes jigjag {
-            0%{
-                background-color: blue;
-            }
-            40%{
-                background-color: rgb(207, 5, 238);
-            }
-            70%{
-                background-color: green;
-            }
-            100%{
-                background-color: rgb(186, 3, 165);;
-            }
-        }
-        a:hover{
-            animation: jigjag 0.1s linear infinite;
-        }
-        .under{
-            margin-top: 100px;
-        } */
+        .delete {
+    padding: 8px 16px;
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    transition: 1s ease;
+    display: inline-block;
+}
 
-        .nav{
-            width: 100%;
-            height: 50px;
-            color: white;
-            background-color: blue
-        }
-        ul li{
-            display: inline-block;
-            padding: 8px 30px;
-            list-style: none;
-        }
-        ul li a{
-            text-decoration: none;
-            color: white;
-        }
+.delete:hover {
+    background-color: #c82333;
+    transform: scale(1.05);
+    padding: 8px 30px;
+}
+
+.delete:active {
+    transform: scale(0.97);
+    background-color: #a71d2a;
+}
+       
     </style>
 </head>
 <body>
-    <nav>
-        <div class="nav">
-            <ul>
-                <li><a href="">view products</a></li>
-                <li><a href="">view menufacturer</a></li>
-                <li><a href="">add product</a></li>
-                <li><a href="">add menufacturer</a></li>
-            </ul>
-        </div>
-    </nav>
+    
     <div class="main">
 <div class="manufacturer">
 <h2>Add Manufacturer</h2>
@@ -159,6 +152,26 @@ if (isset($_POST['add_manufacturer'])) {
     <input type="submit" name="add_product" value="+ Add Product">
 </form>
 
+<div class="delete">
+<form action="" method="POST">
+<select name="manufacturer_id" required>
+        <option value="">-- Select Manufacturer --</option>
+        <?php
+            echo "<option value='{$row['id']}'>{$row['name']} (ID: {$row['id']})</option>";
+        ?>
+    </select>
+    <input type="submit" name="delete_manufacturer" value="delete9">
+</form>
+<?php
+if(isset($_POST['delete_manufacturer'])){
+    $m_id = $_POST['manufacturer_id'];
+    $del = $connect->prepare("CALL after_manufacturer_delete($m_id)");
+    if($del->execute())
+
+}
+?>
+</div>
+
 <?php
 if (isset($_POST['add_product'])) {
     $stmt = $connect->prepare("CALL insert_productss(?, ?, ?)");
@@ -175,8 +188,54 @@ $connect->close();
 ?>
 </div>
 </div>
-<!-- <div class="under">
-    <a href="products_view.php" class="">View Products</a>
-</div> -->
+<div class="table">
+<h2>Products with Price > 5000</h2>
+
+<?php
+$connect = new mysqli("localhost", "root", "", "trainee_project");
+if ($connect->connect_error) {
+    die("Connection failed: " . $connect->connect_error);
+}
+
+$result = $connect->query("SELECT * FROM expensive_products");
+if ($result->num_rows > 0) {
+    echo "<table><tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Manufacturer</th>
+        <th>Manufacturer ID</th>
+        <th>Action</th>
+    </tr>";
+    while ($row = $result->fetch_assoc()) {
+        echo "<tr>
+            <td>{$row['product_id']}</td>
+            <td>{$row['product_name']}</td>
+            <td>{$row['price']}</td>
+            <td>{$row['manufacturer_name']}</td>
+            <td>{$row['manufacturer_id']}</td>
+            <td><a class='delete' href='products_view.php?delid={$row['product_id']}' onclick='return confirm(\"Are you sure?\")'>delete</a></td>
+
+        </tr>";
+    }
+    echo "</table>";
+} else {
+    echo "<p>No products found above price 5000.</p>";
+}
+
+if (isset($_GET['delid'])) {
+    $del_id = intval($_GET['delid']);
+    $stmt = $connect->prepare("CALL delete_product_by_id($del_id)");
+    $stmt->execute();
+    $stmt->close();
+    // Redirect to prevent refresh-based repeat delete
+    header("Location: products_view.php");
+    exit;
+}
+
+$connect->close();
+
+?>
+</div>
 </body>
 </html>

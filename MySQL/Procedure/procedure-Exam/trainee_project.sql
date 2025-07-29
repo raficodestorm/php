@@ -89,7 +89,7 @@ CREATE TABLE deleted_product_log (
 );
 
 -- -----------------------------------------------------
--- add trigger
+-- add trigger for store
 -- -----------------------------------------------------
 
 DELIMITER //
@@ -105,7 +105,7 @@ END //
 DELIMITER ;
 
 -- -----------------------------------------------------
--- add delete procedure
+-- add delete procedure for product
 -- -----------------------------------------------------
 
 DELIMITER //
@@ -116,8 +116,18 @@ BEGIN
 END //
 
 DELIMITER ;
+
 -- -----------------------------------------------------
--- add trigger
+-- add delete procedure for manufacturer
+-- -----------------------------------------------------
+DELIMITER //
+CREATE PROCEDURE delete_manufacturer
+BEGIN 
+    DELETE FROM product WHERE manufacturer_id=id;
+END //
+DELIMITER;
+-- -----------------------------------------------------
+-- add trigger for delete
 -- -----------------------------------------------------
 
 DELIMITER //
@@ -126,7 +136,7 @@ CREATE TRIGGER after_manufacturer_delete
 AFTER DELETE ON product
 FOR EACH ROW
 BEGIN
-    DELETE FROM product WHERE manufacturer_id=OLD.id;
+    DELETE FROM manufacturer WHERE id = OLD.manufacturer_id;
 END //
 
 DELIMITER ;

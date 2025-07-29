@@ -13,16 +13,27 @@ if ($connect->connect_error) {
         body {
             font-family: 'Segoe UI', sans-serif;
             background: #f4f4f9;
+            
         }
         .main{
             display: flex;
             justify-content: center;
-            align-items: center;
+            
         }
         .manufacturer{
-            margin-right: 200px
+            margin-right: 80px;
         }
-        h2 { color: #333; }
+        .product{
+            margin-right: 10px;
+        }
+        .m_delete{
+            margin-top: 110px;
+        }
+
+        h2 { 
+            color: #333; 
+            text-align: center;
+        }
         form {
             background: white;
             padding: 20px;
@@ -107,12 +118,17 @@ if ($connect->connect_error) {
 }
        
     </style>
+
+
 </head>
 <body>
-    
     <div class="main">
+<!--------------------------------------------------------
+                 add manufacturer
+---------------------------------------------------------->
 <div class="manufacturer">
 <h2>Add Manufacturer</h2>
+
 <form method="POST" action="">
     <input type="text" name="m_name" placeholder="Name" required>
     <input type="text" name="m_address" placeholder="Address" required>
@@ -134,9 +150,13 @@ if (isset($_POST['add_manufacturer'])) {
 ?>
 </div>
 
+<!--------------------------------------------------------
+                 add product
+---------------------------------------------------------->
 
 <div class="product">
 <h2>Add Product</h2>
+
 <form method="POST" action="">
     <input type="text" name="p_name" placeholder="Product Name" required>
     <input type="number" name="p_price" placeholder="Price" step="0.01" required>
@@ -152,50 +172,65 @@ if (isset($_POST['add_manufacturer'])) {
     <input type="submit" name="add_product" value="+ Add Product">
 </form>
 
-<div class="delete">
-<form action="" method="POST">
-<select name="manufacturer_id" required>
-        <option value="">-- Select Manufacturer --</option>
-        <?php
-            echo "<option value='{$row['id']}'>{$row['name']} (ID: {$row['id']})</option>";
-        ?>
-    </select>
-    <input type="submit" name="delete_manufacturer" value="delete9">
-</form>
-<?php
-if(isset($_POST['delete_manufacturer'])){
-    $m_id = $_POST['manufacturer_id'];
-    $del = $connect->prepare("CALL after_manufacturer_delete($m_id)");
-    if($del->execute())
-
-}
-?>
-</div>
-
 <?php
 if (isset($_POST['add_product'])) {
     $stmt = $connect->prepare("CALL insert_productss(?, ?, ?)");
     $stmt->bind_param("sdi", $_POST['p_name'], $_POST['p_price'], $_POST['p_manufacturer_id']);
     if ($stmt->execute()) {
         echo "<div class='message'>Product added successfully!</div>";
-        header("Location: products_view.php");
     } else {
         echo "<div class='message'>Error: " . htmlspecialchars($connect->error) . "</div>";
     }
     $stmt->close();
 }
-$connect->close();
+
 ?>
 </div>
+
+<!--------------------------------------------------------
+                 delete manufacturer
+---------------------------------------------------------->
+
+<div class="m_delete">
+    <h2>Delete Manufacturer</h2>
+
+<form action="" method="POST">
+    <select name="manufacturer_id">
+        <option value="">-- Select Manufacturer --</option>
+        <?php
+            $result = $connect->query("SELECT id, name FROM manufacturer");
+        while ($row = $result->fetch_assoc()) {
+            echo "<option value='{$row['id']}'>{$row['name']} (ID: {$row['id']})</option>";
+        }
+        ?>
+    </select>
+    <input type="submit" name="delete_manufacturer" value="delete">
+</form>
+
+<?php
+if(isset($_POST['delete_manufacturer'])){
+    $m_id = $_POST['manufacturer_id'];
+    $del = $connect->prepare("CALL delete_manufacturer($m_id)");
+    if($del->execute()){
+        echo "<div class='message'>Manufacturer deleted successfully!</div>";
+    } else{
+        echo "<div class='message'>Error: " . htmlspecialchars($connect->error) . "</div>";
+    }
+    $del->close();
+
+}
+?>
 </div>
+</div> <!-- end main div -->
+
+<!--------------------------------------------------------
+                 show all products > 5000
+---------------------------------------------------------->
+
 <div class="table">
 <h2>Products with Price > 5000</h2>
 
 <?php
-$connect = new mysqli("localhost", "root", "", "trainee_project");
-if ($connect->connect_error) {
-    die("Connection failed: " . $connect->connect_error);
-}
 
 $result = $connect->query("SELECT * FROM expensive_products");
 if ($result->num_rows > 0) {
@@ -223,13 +258,16 @@ if ($result->num_rows > 0) {
     echo "<p>No products found above price 5000.</p>";
 }
 
+//--------------------------------------------------------
+//                 delete product
+//-------------------------------------------------------->
 if (isset($_GET['delid'])) {
     $del_id = intval($_GET['delid']);
     $stmt = $connect->prepare("CALL delete_product_by_id($del_id)");
     $stmt->execute();
     $stmt->close();
     // Redirect to prevent refresh-based repeat delete
-    header("Location: products_view.php");
+    header("Location: insert.php");
     exit;
 }
 

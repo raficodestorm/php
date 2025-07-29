@@ -15,7 +15,8 @@
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
         th, td {
-            padding: 12px;
+            padding: 10px;
+            text-align: center;
             border: 1px solid #ddd;
         }
         th {
@@ -30,7 +31,7 @@
         }
         .delete {
     padding: 8px 16px;
-    background-color: #dc3545; /* Bootstrap danger red */
+    background-color: #dc3545;
     color: #fff;
     border: none;
     text-decoration: none;
@@ -38,12 +39,14 @@
     font-size: 14px;
     font-weight: bold;
     transition: background-color 0.3s ease, transform 0.2s ease;
+    transition: 1s ease;
     display: inline-block;
 }
 
 .delete:hover {
     background-color: #c82333;
     transform: scale(1.05);
+    padding: 8px 30px;
 }
 
 .delete:active {
@@ -61,17 +64,6 @@
 $connect = new mysqli("localhost", "root", "", "trainee_project");
 if ($connect->connect_error) {
     die("Connection failed: " . $connect->connect_error);
-}
-
-if (isset($_GET['delid'])) {
-    $del_id = intval($_GET['delid']);
-    $stmt = $connect->prepare("CALL delete_product_by_id(?)");
-    $stmt->bind_param("i", $del_id);
-    $stmt->execute();
-    $stmt->close();
-    // Redirect to prevent refresh-based repeat delete
-    header("Location: products_view.php");
-    exit;
 }
 
 $result = $connect->query("SELECT * FROM expensive_products");
@@ -99,6 +91,17 @@ if ($result->num_rows > 0) {
 } else {
     echo "<p>No products found above price 5000.</p>";
 }
+
+if (isset($_GET['delid'])) {
+    $del_id = intval($_GET['delid']);
+    $stmt = $connect->prepare("CALL delete_product_by_id($del_id)");
+    $stmt->execute();
+    $stmt->close();
+    // Redirect to prevent refresh-based repeat delete
+    header("Location: products_view.php");
+    exit;
+}
+
 $connect->close();
 ?>
 

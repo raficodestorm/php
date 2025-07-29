@@ -103,3 +103,16 @@ BEGIN
 END //
 
 DELIMITER ;
+
+-- -----------------------------------------------------
+-- add delete procedure
+-- -----------------------------------------------------
+
+DELIMITER //
+
+CREATE PROCEDURE delete_product_by_id(IN product_id INT)
+BEGIN
+    DELETE FROM expensive_products WHERE id = product_id;
+END //
+
+DELIMITER ;

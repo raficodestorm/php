@@ -37,7 +37,7 @@ if ($connect->connect_error) {
         form {
             background: white;
             padding: 20px;
-            margin-bottom: 30px;
+            margin-bottom: 10px;
             border-radius: 8px;
             width: 350px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
@@ -69,8 +69,46 @@ if ($connect->connect_error) {
                 background-color: #8338ec;
             }
         }
-        .message { margin: 10px 0; font-weight: bold; }
+        .flash-message {
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    z-index: 9999;
+    background-color: #80ed9956;
+    color: #0f5132;
+    padding: 15px 25px;
+    border-radius: 8px;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    font-weight: bold;
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: fadeInOut 5s ease-in-out forwards;
+    transition: all 0.5s ease;
+}
 
+.flash-message.error {
+    background-color: #f8d7da;
+    color: #842029;
+}
+
+@keyframes fadeInOut {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    10% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    90% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+}
         table {
             width: 100%;
             border-collapse: collapse;
@@ -141,9 +179,9 @@ if (isset($_POST['add_manufacturer'])) {
     $stmt = $connect->prepare("CALL insert_manufacturer(?, ?, ?)");
     $stmt->bind_param("sss", $_POST['m_name'], $_POST['m_address'], $_POST['m_contact']);
     if ($stmt->execute()) {
-        echo "<div class='message'>Manufacturer added successfully!</div>";
+        echo "<div class='flash-message success'>Manufacturer added successfully!</div>";
     } else {
-        echo "<div class='message'>Error: " . htmlspecialchars($connect->error) . "</div>";
+        echo "<div class='flash-message error' >Error: " . htmlspecialchars($connect->error) . "</div>";
     }
     $stmt->close();
 }
@@ -177,9 +215,9 @@ if (isset($_POST['add_product'])) {
     $stmt = $connect->prepare("CALL insert_productss(?, ?, ?)");
     $stmt->bind_param("sdi", $_POST['p_name'], $_POST['p_price'], $_POST['p_manufacturer_id']);
     if ($stmt->execute()) {
-        echo "<div class='message'>Product added successfully!</div>";
+        echo "<div class='flash-message success' >Product added successfully!</div>";
     } else {
-        echo "<div class='message'>Error: " . htmlspecialchars($connect->error) . "</div>";
+        echo "<div class='flash-message error' >Error: " . htmlspecialchars($connect->error) . "</div>";
     }
     $stmt->close();
 }
@@ -212,16 +250,16 @@ if(isset($_POST['delete_manufacturer'])){
     $m_id = $_POST['manufacturer_id'];
     $del = $connect->prepare("CALL delete_manufacturer($m_id)");
     if($del->execute()){
-        echo "<div class='message'>Manufacturer deleted successfully!</div>";
+        echo "<div class='flash-message success' >Manufacturer deleted successfully!</div>";
     } else{
-        echo "<div class='message'>Error: " . htmlspecialchars($connect->error) . "</div>";
+        echo "<div class='flash-message error' >Error: " . htmlspecialchars($connect->error) . "</div>";
     }
     $del->close();
 
 }
 ?>
 </div>
-</div> <!-- end main div -->
+</div>    <!-- end main div -->
 
 <!--------------------------------------------------------
                  show all products > 5000
@@ -261,12 +299,12 @@ if ($result->num_rows > 0) {
 //--------------------------------------------------------
 //                 delete product
 //-------------------------------------------------------->
+
 if (isset($_GET['delid'])) {
     $del_id = intval($_GET['delid']);
     $stmt = $connect->prepare("CALL delete_product_by_id($del_id)");
     $stmt->execute();
     $stmt->close();
-    // Redirect to prevent refresh-based repeat delete
     header("Location: insert.php");
     exit;
 }
@@ -275,5 +313,18 @@ $connect->close();
 
 ?>
 </div>
+
+<!--------------------------------------------------------
+                 message design
+---------------------------------------------------------->
+<script>
+    setTimeout(() => {
+        document.querySelectorAll('.flash-message').forEach(msg => {
+            msg.style.opacity = '0';
+            msg.style.transform = 'translateY(-20px)';
+            setTimeout(() => msg.remove(), 1000); // Remove from DOM after animation
+        });
+    }, 5000); // after 5 seconds
+</script>
 </body>
 </html>

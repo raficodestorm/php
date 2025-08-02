@@ -1,3 +1,5 @@
+<?php ob_start(); ?>
+
 <?php
 $connect = new mysqli("localhost", "root", "", "trainee_project");
 if ($connect->connect_error) {
@@ -176,7 +178,7 @@ if ($connect->connect_error) {
 
 <?php
 if (isset($_POST['add_manufacturer'])) {
-    $stmt = $connect->prepare("CALL insert_manufacturer(?, ?, ?)");
+    $stmt = $connect->prepare("CALL insert_manufacturer(?, ?, ?)");  // ------call procedure-------
     $stmt->bind_param("sss", $_POST['m_name'], $_POST['m_address'], $_POST['m_contact']);
     if ($stmt->execute()) {
         echo "<div class='flash-message success'>Manufacturer added successfully!</div>";
@@ -212,7 +214,7 @@ if (isset($_POST['add_manufacturer'])) {
 
 <?php
 if (isset($_POST['add_product'])) {
-    $stmt = $connect->prepare("CALL insert_productss(?, ?, ?)");
+    $stmt = $connect->prepare("CALL insert_productss(?, ?, ?)");   // ------call procedure-------
     $stmt->bind_param("sdi", $_POST['p_name'], $_POST['p_price'], $_POST['p_manufacturer_id']);
     if ($stmt->execute()) {
         echo "<div class='flash-message success' >Product added successfully!</div>";
@@ -248,7 +250,7 @@ if (isset($_POST['add_product'])) {
 <?php
 if(isset($_POST['delete_manufacturer'])){
     $m_id = $_POST['manufacturer_id'];
-    $del = $connect->prepare("CALL delete_manufacturer($m_id)");
+    $del = $connect->prepare("CALL delete_manufacturer($m_id)");   // ------call procedure and run trigger-------
     if($del->execute()){
         echo "<div class='flash-message success' >Manufacturer deleted successfully!</div>";
     } else{
@@ -270,7 +272,7 @@ if(isset($_POST['delete_manufacturer'])){
 
 <?php
 
-$result = $connect->query("SELECT * FROM expensive_products");
+$result = $connect->query("SELECT * FROM expensive_products");   //----show view 
 if ($result->num_rows > 0) {
     echo "<table><tr>
         <th>ID</th>
@@ -287,7 +289,7 @@ if ($result->num_rows > 0) {
             <td>{$row['price']}</td>
             <td>{$row['manufacturer_name']}</td>
             <td>{$row['manufacturer_id']}</td>
-            <td><a class='delete' href='products_view.php?delid={$row['product_id']}' onclick='return confirm(\"Are you sure?\")'>delete</a></td>
+            <td><a class='delete' href='insert.php?delid={$row['product_id']}' onclick='return confirm(\"Are you sure?\")'>delete</a></td>
 
         </tr>";
     }
@@ -295,7 +297,8 @@ if ($result->num_rows > 0) {
 } else {
     echo "<p>No products found above price 5000.</p>";
 }
-
+?>
+<?php
 //--------------------------------------------------------
 //                 delete product
 //-------------------------------------------------------->
@@ -305,7 +308,7 @@ if (isset($_GET['delid'])) {
     $stmt = $connect->prepare("CALL delete_product_by_id($del_id)");
     $stmt->execute();
     $stmt->close();
-    header("Location: insert.php");
+    header("Location: insert.php" );
     exit;
 }
 
@@ -328,3 +331,7 @@ $connect->close();
 </script>
 </body>
 </html>
+
+
+
+<?php ob_end_flush(); ?>

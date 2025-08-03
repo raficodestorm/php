@@ -12,7 +12,7 @@ CREATE TABLE role (
 CREATE TABLE admin (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
-    phone INT NOT(20) NULL,
+    phone INT(20) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
     role_id INT DEFAULT 1,
@@ -78,11 +78,9 @@ CREATE TABLE customers (
 
 -- 8. Sales Table
 CREATE TABLE sales (
-    id INT AUTO_INCREMENT PRIMARY KEY
+    id INT AUTO_INCREMENT PRIMARY KEY,
     customer_id INT,
     pharmacist_id INT,
-    quantity INT NOT NULL,
-    unit_price DECIMAL(10,2) NOT NULL,
     total_amount DECIMAL(10,2),
     sale_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (customer_id) REFERENCES customers(id),
@@ -154,5 +152,5 @@ CREATE TABLE expired_medicine (
     FOREIGN KEY (stock_id) REFERENCES stock(id)
 );
 
--- Optional: Insert default roles
+-- Insert default roles
 INSERT INTO role (role_name) VALUES ('Admin'), ('Pharmacist');

@@ -11,7 +11,8 @@ CREATE TABLE role (
 -- 2. Admin Table
 CREATE TABLE admin (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
+    fullname VARCHAR(100) NOT NULL,
+    username VARCHAR(100) NOT NULL,
     phone INT(20) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
@@ -23,14 +24,15 @@ CREATE TABLE admin (
 -- 3. Pharmacist Table
 CREATE TABLE pharmacist (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
+    fullname VARCHAR(100) NOT NULL,
+    username VARCHAR(100) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
     phone VARCHAR(20),
     address TEXT,
     password VARCHAR(255) NOT NULL,
-    role_id INT DEFAULT 2,
+    role_name VARCHAR(100) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (role_id) REFERENCES role(id)
+    FOREIGN KEY (role_name) REFERENCES role(role_name)
 );
 
 -- 4. Supplier Table

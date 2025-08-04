@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Pharmacy Sales Form</title>
+  <title>Sales Form</title>
   <style>
     * {
       margin: 0;
@@ -125,7 +125,7 @@
       <div class="form-group">
         <label for="customer">Select Customer</label>
         <select name="customer_id" required>
-          <option value="">-- Choose Customer --</option>
+          <option value="" disabled selected hidden>Select a medicine</option>
           <option value="1">John Doe</option>
           <option value="2">Jane Smith</option>
         </select>
@@ -150,7 +150,7 @@
         <input type="number" id="grand-total" name="grand_total" readonly value="0.00">
       </div>
 
-      <button type="submit" class="submit-btn">Confirm Sale</button>
+      <button type="submit" class="submit-sale">Confirm Sale</button>
     </form>
   </div>
 

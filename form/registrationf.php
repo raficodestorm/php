@@ -19,7 +19,7 @@
       height: 100vh;
     }
 
-    .login-box {
+    .reg-box {
       background: #fff;
       padding: 30px 25px;
       border-radius: 10px;
@@ -28,7 +28,7 @@
       max-width: 400px;
     }
 
-    .login-box h2 {
+    .reg-box h2 {
       text-align: center;
       margin-bottom: 25px;
       color: #333;
@@ -59,7 +59,7 @@
       outline: none;
     }
 
-    .submit-btn {
+    .submit-reg {
       width: 100%;
       padding: 10px;
       background-color: #007BFF;
@@ -71,7 +71,7 @@
       transition: background-color 0.3s;
     }
 
-    .submit-btn:hover {
+    .submit-reg:hover {
       background-color: #0056b3;
     }
 
@@ -94,13 +94,36 @@
 </head>
 <body>
 
-  <div class="login-box">
+  <div class="reg-box">
+    
+    <form action="#" method="POST">
     <h2>Login</h2>
-    <form action="login.php" method="POST">
+      <div class="form-group">
+        <label for="fullname">fullname</label>
+        <input type="text" id="fullname" name="fullname" required>
+      </div>
+
       <div class="form-group">
         <label for="username">Username</label>
         <input type="text" id="username" name="username" required>
       </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+
+      <div class="form-group">
+        <label for="username">Phone</label>
+        <input type="number" id="phone" name="phone" required>
+      </div>
+
+      <div class="form-group">
+        <label for="username">Branch</label>
+        <input type="text" id="branch" name="branch" required>
+      </div>
+
+      
 
       <div class="form-group">
         <label for="password">Password</label>
@@ -116,7 +139,7 @@
         </select>
       </div>
 
-      <button type="submit" class="submit-btn">Submit</button>
+      <button type="submit" class="submit-reg">Submit</button>
 
       <div class="links">
         <a href="#">Login</a>

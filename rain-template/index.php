@@ -1,4 +1,4 @@
-    <?php  include "include/top-head.php"  ?>
+    <?php  include "include/head-section.php"  ?>
     <?php  include "include/header.php"  ?>
     <?php  include "include/sidebar.php"  ?>
     

@@ -27,7 +27,7 @@
                     <b class="logo-abbr"><img src="images/logo.png" alt=""> </b>
                     <!-- <span class="logo-compact"><img src="./images/logo-compact.png" alt=""></span> -->
                     <span class="brand-title">
-                        <p style="color: white"><b>Payroll</b></p>
+                        <p style="color: white"><b>Pharma</b></p>
                     </span>
                 </a>
             </div>

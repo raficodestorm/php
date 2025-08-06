@@ -1,6 +1,11 @@
+
+---Hello Rafia !--- 
+--I created the file for you.--
+---you can use this file for your project
+
 -- Create the database
-CREATE DATABASE IF NOT EXISTS `rainstar_pharma`;
-USE `rainstar_pharma`;
+CREATE DATABASE IF NOT EXISTS `rabonna_supershop`;
+USE `rabonna_supershop`;
 
 -- 1. Role Table
 CREATE TABLE users (
@@ -21,8 +26,8 @@ CREATE TABLE admin (
     FOREIGN KEY (role_id) REFERENCES users(id)
 );
 
--- 3. Pharmacist Table
-CREATE TABLE pharmacist (
+-- 3. manager Table
+CREATE TABLE manager (
     id INT AUTO_INCREMENT PRIMARY KEY,
     fullname VARCHAR(100) NOT NULL,
     username VARCHAR(100) NOT NULL,
@@ -36,7 +41,7 @@ CREATE TABLE pharmacist (
 );
 
 -- 4. Supplier Table
-CREATE TABLE supplier (
+CREATE TABLE vendor (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     contact_person VARCHAR(100),
@@ -46,30 +51,30 @@ CREATE TABLE supplier (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- 5. Medicine Type Table
-CREATE TABLE medicine_type (
+-- 5. product category Table
+CREATE TABLE product_category (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    type_name VARCHAR(100) NOT NULL
+    category VARCHAR(100) NOT NULL
 );
 
 -- 6. Stock Table
 CREATE TABLE stock (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    medicine_name VARCHAR(100) NOT NULL,
-    medicine_type_id INT,
+    product_name VARCHAR(100) NOT NULL,
+    product_category_id INT,
     quantity INT DEFAULT 0,
     purchase_price DECIMAL(10,2),
     sale_price DECIMAL(10,2),
     manufacture_date DATE,
     expiry_date DATE,
-    supplier_id INT,
+    vendor_id INT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (medicine_type_id) REFERENCES medicine_type(id),
-    FOREIGN KEY (supplier_id) REFERENCES supplier(id)
+    FOREIGN KEY (product_category_id) REFERENCES product_category(id),
+    FOREIGN KEY (vendor_id) REFERENCES vendor(id)
 );
 
 -- 7. Customers Table
-CREATE TABLE customers (
+CREATE TABLE reg_customers (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     phone VARCHAR(20),
@@ -82,14 +87,14 @@ CREATE TABLE customers (
 CREATE TABLE sales (
     id INT AUTO_INCREMENT PRIMARY KEY,
     customer_id INT,
-    pharmacist_id INT,
+    manager_id INT,
     total_amount DECIMAL(10,2),
     sale_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (customer_id) REFERENCES customers(id),
-    FOREIGN KEY (pharmacist_id) REFERENCES pharmacist(id)
+    FOREIGN KEY (customer_id) REFERENCES reg_customers(id),
+    FOREIGN KEY (manager_id) REFERENCES manager(id)
 );
 
--- 9. Sale Items Table (Details of medicines sold in a sale)
+-- 9. Sale Items Table (Details of products sold in a sale)
 CREATE TABLE sale_items (
     id INT AUTO_INCREMENT PRIMARY KEY,
     sale_id INT,
@@ -116,10 +121,10 @@ CREATE TABLE return_items (
 -- 11. Purchases Table
 CREATE TABLE purchases (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    supplier_id INT,
+    vendor_id INT,
     total_amount DECIMAL(10,2),
     purchase_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (supplier_id) REFERENCES supplier(id)
+    FOREIGN KEY (vendor_id) REFERENCES vendor(id)
 );
 
 -- 12. Purchase Items Table
@@ -145,8 +150,8 @@ CREATE TABLE purchase_return (
     FOREIGN KEY (stock_id) REFERENCES stock(id)
 );
 
--- 14. Expired Medicine Table
-CREATE TABLE expired_medicine (
+-- 14. Expired product Table
+CREATE TABLE expired_product (
     id INT AUTO_INCREMENT PRIMARY KEY,
     stock_id INT,
     expiry_date DATE,
@@ -155,4 +160,4 @@ CREATE TABLE expired_medicine (
 );
 
 -- Insert default roles
-INSERT INTO role (role_name) VALUES ('Admin'), ('Pharmacist');
+INSERT INTO role (role_name) VALUES ('Admin'), ('Manager');

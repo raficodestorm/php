@@ -21,14 +21,11 @@
         <!--**********************************
             Nav header start
         ***********************************-->
-        <div class="nav-header">
-            <div class="brand-logo">
-                <a href="index.html">
-                    <b class="logo-abbr"><img src="images/logo.png" alt=""> </b>
-                    <!-- <span class="logo-compact"><img src="./images/logo-compact.png" alt=""></span> -->
-                    <span class="brand-title">
-                        <p style="color: white"><b>Pharma</b></p>
-                    </span>
+        <div class="logo-part">
+            <div class="rain">
+                <a href="#">
+            
+            <img src="rainstar.png" alt="">
                 </a>
             </div>
         </div>
@@ -49,16 +46,19 @@
                 </div>
                 <div class="header-left">
                     <div class="input-group icons">
-                        <div class="input-group-prepend">
+                        <div class="" id="ic">
                             <span class="input-group-text bg-transparent border-0 pr-2 pr-sm-3" id="basic-addon1"><i class="mdi mdi-magnify"></i></span>
                         </div>
-                        <input type="search" class="form-control" placeholder="Search Dashboard" aria-label="Search Dashboard">
-                        <div class="drop-down animated flipInX d-md-none">
+                
+                        
+                    </div>
+                </div>
+
+               
+                <div class="searchm container">
                             <form action="#">
                                 <input type="text" class="form-control" placeholder="Search">
                             </form>
-                        </div>
-                    </div>
                 </div>
                 <div class="header-right">
                     <ul class="clearfix">

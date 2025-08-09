@@ -96,7 +96,7 @@
 
   <div class="login-box">
     <h2>Login</h2>
-    <form action="login.php" method="POST">
+    <form action="loginform.php" method="POST">
       <div class="form-group">
         <label for="username">Username</label>
         <input type="text" id="username" name="username" required>
@@ -152,7 +152,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $role = $_POST['role'];
 
     // Prepare and execute SQL query
-    $stmt = $conn->prepare("SELECT id, username, password, role FROM pharmacist WHERE username = ? AND role = ?");
+    $stmt = $conn->prepare("SELECT id, username, password, role_name FROM pharmacist WHERE username = ? AND role_name = ?");
     $stmt->bind_param("ss", $username, $role);
     $stmt->execute();
     $stmt->store_result();
@@ -170,10 +170,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['role'] = $dbRole;
 
             // Redirect based on role
-            if ($dbRole == 'admin') {
-                header("Location: admin_dashboard.php");
-            } elseif ($dbRole == 'pharmacist') {
+            if ($dbRole == 'pharmacist') {
                 header("Location: pharmacist_dashboard.php");
+            } elseif ($dbRole == 'admin') {
+                header("Location: admin_dashboard.php");
             }
             exit;
         } else {

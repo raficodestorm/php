@@ -231,8 +231,9 @@ if (!is_dir("uploads")) {
 if (in_array($imageExt, $allowedExt) && $_FILES['image']['size'] <= 2 * 1024 * 1024) {
     if (move_uploaded_file($imageTmp, $imageFolder)) {
         // Insert with the new image name
-        $stmt = $conn->prepare("INSERT INTO pharmacist (fullname, username, email, phone, branch, password, role_name, image) VALUES ('$fullname', '$username', '$email', '$phone', '$branch', '$password', '$role', '$newImageName')");
-        // $stmt->bind_param($fullname, $username, $email, $phone, $branch, $password, $role, $newImageName);
+        $stmt = $conn->prepare("INSERT INTO pharmacist (fullname, username, email, phone, branch, password, role_name, image) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("ssssssss", $fullname, $username, $email, $phone, $branch, $password, $role, $newImageName);
+
 
         if ($stmt->execute()) {
             echo "<p style='color:green;'>Registration successful!</p>";

@@ -129,3 +129,65 @@
 
 </body>
 </html>
+<?php
+session_start();
+
+// Database connection settings
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "rainstar_pharma";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check DB connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Process login form
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = trim($_POST['username']);
+    $password = $_POST['password'];
+    $role = $_POST['role'];
+
+    // Prepare and execute SQL query
+    $stmt = $conn->prepare("SELECT id, username, password, role FROM users WHERE username = ? AND role = ?");
+    $stmt->bind_param("ss", $username, $role);
+    $stmt->execute();
+    $stmt->store_result();
+
+    // If user exists
+    if ($stmt->num_rows > 0) {
+        $stmt->bind_result($id, $dbUsername, $dbPassword, $dbRole);
+        $stmt->fetch();
+
+        // Verify password
+        if (password_verify($password, $dbPassword)) {
+            // Store user info in session
+            $_SESSION['user_id'] = $id;
+            $_SESSION['username'] = $dbUsername;
+            $_SESSION['role'] = $dbRole;
+
+            // Redirect based on role
+            if ($dbRole == 'admin') {
+                header("Location: admin_dashboard.php");
+            } elseif ($dbRole == 'pharmacist') {
+                header("Location: pharmacist_dashboard.php");
+            } elseif ($dbRole == 'staff') {
+                header("Location: staff_dashboard.php");
+            }
+            exit;
+        } else {
+            echo "<p style='color:red;'>Invalid password!</p>";
+        }
+    } else {
+        echo "<p style='color:red;'>No user found with that username and role!</p>";
+    }
+
+    $stmt->close();
+}
+
+$conn->close();
+?>

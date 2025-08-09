@@ -17,6 +17,7 @@ CREATE TABLE admin (
     email VARCHAR(100) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
     role_id INT DEFAULT 1,
+    image VARCHAR(255) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (role_id) REFERENCES users(id)
 );
@@ -28,9 +29,10 @@ CREATE TABLE pharmacist (
     username VARCHAR(100) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
     phone VARCHAR(20),
-    address TEXT,
+    branch TEXT,
     password VARCHAR(255) NOT NULL,
     role_name VARCHAR(100) NOT NULL,
+    image VARCHAR(255) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (role_name) REFERENCES users(role_name)
 );

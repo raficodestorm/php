@@ -12,24 +12,27 @@
 
     body {
       font-family: 'Segoe UI', sans-serif;
-      background: #f4f7f9;
-      color: #333;
+      background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
+      color: #e0e0e0;
       padding: 40px;
     }
 
     .form-container {
-      background: #fff;
-      border-radius: 16px;
+      background: rgba(30, 30, 30, 0.85);
+      backdrop-filter: blur(12px);
+      border-radius: 14px;
       padding: 30px 40px;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
       max-width: 900px;
       margin: auto;
+      border: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     h2 {
       text-align: center;
       margin-bottom: 25px;
-      color: #2c3e50;
+      color: #ffffff;
+      letter-spacing: 0.5px;
     }
 
     .form-group {
@@ -41,20 +44,24 @@
     label {
       margin-bottom: 8px;
       font-weight: 600;
+      color: #bdbdbd;
     }
 
     input, select {
       padding: 10px 14px;
       border-radius: 8px;
-      border: 1px solid #ccc;
+      border: 1px solid #333;
       font-size: 15px;
-      transition: 0.3s;
+      background-color: rgba(40, 40, 40, 0.9);
+      color: #ffffff;
+      transition: all 0.3s ease;
     }
 
     input:focus, select:focus {
-      border-color: #007bff;
+      border-color: #4dabf7;
       outline: none;
-      background: #eef8ff;
+      box-shadow: 0 0 8px rgba(77, 171, 247, 0.5);
+      background-color: rgba(50, 50, 50, 0.95);
     }
 
     .grid-row {
@@ -67,54 +74,70 @@
 
     .add-medicine-btn {
       margin-top: 10px;
-      padding: 8px 18px;
+      padding: 10px 18px;
       border: none;
-      background: #2ecc71;
+      background: linear-gradient(135deg, #27ae60, #1e8449);
       color: white;
       border-radius: 8px;
       cursor: pointer;
-      transition: 0.2s;
+      font-weight: 600;
+      transition: all 0.3s ease;
     }
 
     .add-medicine-btn:hover {
-      background: #27ae60;
+      background: linear-gradient(135deg, #2ecc71, #239b56);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(46, 204, 113, 0.4);
     }
 
     .submit-sale {
-      background: #1ba3fd;
+      background: linear-gradient(135deg, #4dabf7, #1c7ed6);
       color: white;
       padding: 12px 20px;
       font-size: 16px;
+      font-weight: 600;
       border: none;
       border-radius: 10px;
       width: 100%;
       cursor: pointer;
-      transition: 0.3s;
+      transition: all 0.3s ease;
     }
 
     .submit-sale:hover {
-      background: #026fb8;
+      background: linear-gradient(135deg, #339af0, #1864ab);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(52, 152, 219, 0.4);
     }
 
     .section-title {
       margin: 20px 0 10px;
       font-size: 18px;
-      color: #555;
-      border-bottom: 1px solid #ddd;
+      color: #bbbbbb;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
       padding-bottom: 5px;
     }
 
     .delete-btn {
       padding: 8px 10px;
-      background-color: #e74c3c;
+      background: linear-gradient(135deg, #e74c3c, #c0392b);
       color: white;
       border: none;
       border-radius: 6px;
       cursor: pointer;
+      font-size: 14px;
+      transition: all 0.3s ease;
     }
 
     .delete-btn:hover {
-      background-color: #c0392b;
+      background: linear-gradient(135deg, #ff6b6b, #d63031);
+      transform: scale(1.05);
+    }
+
+    /* Mobile: single column */
+    @media (max-width: 600px) {
+      .grid-row {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -224,3 +247,4 @@
   </script>
 </body>
 </html>
+

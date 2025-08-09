@@ -2,104 +2,135 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Login Form</title>
+  <title>registraition Form</title>
   <style>
-    * {
-      box-sizing: border-box;
-      font-family: 'Segoe UI', sans-serif;
-      margin: 0;
-      padding: 0;
-    }
+   body {
+  background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+  font-family: 'Segoe UI', sans-serif;
+  color: #e0e0e0;
+}
 
-    body {
-      background: #f0f4f8;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
+.reg-box {
+  background: rgba(30, 30, 30, 0.85);
+  backdrop-filter: blur(12px);
+  padding: 40px 30px;
+  border-radius: 14px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+  max-width: 800px;
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
 
-    .reg-box {
-      background: #fff;
-      padding: 30px 25px;
-      border-radius: 10px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-      width: 100%;
-      max-width: 400px;
-    }
+.reg-box h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 1.8rem;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+}
 
-    .reg-box h2 {
-      text-align: center;
-      margin-bottom: 25px;
-      color: #333;
-    }
+form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
 
-    .form-group {
-      margin-bottom: 20px;
-    }
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
 
-    label {
-      display: block;
-      font-weight: 600;
-      margin-bottom: 6px;
-      color: #555;
-    }
+label {
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #bdbdbd;
+  font-size: 0.95rem;
+}
 
-    input, select {
-      width: 100%;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      font-size: 14px;
-      transition: border-color 0.3s;
-    }
+input, select {
+  padding: 12px;
+  border: 1px solid #333;
+  border-radius: 8px;
+  font-size: 15px;
+  background-color: rgba(40, 40, 40, 0.9);
+  color: #ffffff;
+  transition: all 0.3s ease;
+}
 
-    input:focus, select:focus {
-      border-color: #007BFF;
-      outline: none;
-    }
+input:focus, select:focus {
+  border-color: #4dabf7;
+  outline: none;
+  box-shadow: 0 0 8px rgba(77, 171, 247, 0.5);
+  background-color: rgba(50, 50, 50, 0.95);
+}
 
-    .submit-reg {
-      width: 100%;
-      padding: 10px;
-      background-color: #007BFF;
-      border: none;
-      color: white;
-      font-size: 16px;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
+.submit-reg {
+  grid-column: span 2;
+  padding: 14px;
+  background: linear-gradient(135deg, #4dabf7, #1c7ed6);
+  border: none;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
 
-    .submit-reg:hover {
-      background-color: #0056b3;
-    }
+.submit-reg:hover {
+  background: linear-gradient(135deg, #339af0, #1864ab);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(52, 152, 219, 0.4);
+}
 
-    .links {
-      text-align: center;
-      margin-top: 15px;
-    }
+.links {
+  grid-column: span 2;
+  text-align: center;
+  margin-top: 15px;
+}
 
-    .links a {
-      margin: 0 10px;
-      text-decoration: none;
-      color: #007BFF;
-      font-size: 14px;
-    }
+.links a {
+  margin: 0 10px;
+  text-decoration: none;
+  color: #4dabf7;
+  font-size: 14px;
+  transition: color 0.3s ease;
+}
 
-    .links a:hover {
-      text-decoration: underline;
-    }
+.links a:hover {
+  text-decoration: underline;
+  color: #82cfff;
+}
+
+/* Mobile: single column */
+@media (max-width: 600px) {
+  form {
+    grid-template-columns: 1fr;
+  }
+
+  .submit-reg,
+  .links {
+    grid-column: span 1;
+  }
+}
+
+
+
   </style>
 </head>
 <body>
 
   <div class="reg-box">
-    
+  <h2>Pharmacist Registration</h2>
     <form action="#" method="POST" enctype="multipart/form-data">
-    <h2>Login</h2>
+    
       <div class="form-group">
-        <label for="fullname">fullname</label>
+        <label for="fullname">Fullname</label>
         <input type="text" id="fullname" name="fullname" required>
       </div>
 
@@ -200,8 +231,8 @@ if (!is_dir("uploads")) {
 if (in_array($imageExt, $allowedExt) && $_FILES['image']['size'] <= 2 * 1024 * 1024) {
     if (move_uploaded_file($imageTmp, $imageFolder)) {
         // Insert with the new image name
-        $stmt = $conn->prepare("INSERT INTO users (fullname, username, email, phone, branch, password, role, image) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("ssssssss", $fullname, $username, $email, $phone, $branch, $password, $role, $newImageName);
+        $stmt = $conn->prepare("INSERT INTO pharmacist (fullname, username, email, phone, branch, password, role_name, image) VALUES ('$fullname', '$username', '$email', '$phone', '$branch', '$password', '$role', '$newImageName')");
+        // $stmt->bind_param($fullname, $username, $email, $phone, $branch, $password, $role, $newImageName);
 
         if ($stmt->execute()) {
             echo "<p style='color:green;'>Registration successful!</p>";

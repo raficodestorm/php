@@ -112,15 +112,14 @@
         <select name="role" id="role" required>
           <option value="" disabled selected hidden>Select role</option>
           <option value="admin">Admin</option>
-          <option value="pharmacist">Pharmacist</option>
-          <option value="staff">Staff</option>
+          <option value="pharmacist">pharmacist</option>
         </select>
       </div>
 
       <button type="submit" class="submit-btn">Login</button>
 
       <div class="links">
-        <a href="#">Register</a>
+        <a href="registrationf.php">Register</a>
         |
         <a href="#">Forgot Password?</a>
       </div>
@@ -153,7 +152,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $role = $_POST['role'];
 
     // Prepare and execute SQL query
-    $stmt = $conn->prepare("SELECT id, username, password, role FROM users WHERE username = ? AND role = ?");
+    $stmt = $conn->prepare("SELECT id, username, password, role FROM pharmacist WHERE username = ? AND role = ?");
     $stmt->bind_param("ss", $username, $role);
     $stmt->execute();
     $stmt->store_result();
@@ -175,8 +174,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 header("Location: admin_dashboard.php");
             } elseif ($dbRole == 'pharmacist') {
                 header("Location: pharmacist_dashboard.php");
-            } elseif ($dbRole == 'staff') {
-                header("Location: staff_dashboard.php");
             }
             exit;
         } else {

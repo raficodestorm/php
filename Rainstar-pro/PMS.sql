@@ -157,4 +157,4 @@ CREATE TABLE expired_medicine (
 );
 
 -- Insert default roles
-INSERT INTO role (role_name) VALUES ('Admin'), ('Pharmacist');
+INSERT INTO users (role_name) VALUES ('Admin'), ('Pharmacist');

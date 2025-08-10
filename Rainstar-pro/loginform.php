@@ -12,7 +12,7 @@
     }
 
     body {
-      background: #f0f4f8;
+      background: black;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -20,7 +20,7 @@
     }
 
     .login-box {
-      background: #fff;
+      background: #001233;
       padding: 30px 25px;
       border-radius: 10px;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);

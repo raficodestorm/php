@@ -6,13 +6,13 @@
           <a class="sidebar-brand brand-logo" href="#"><img src="images/rainstar.png" alt="logo" /></a>
         </div> -->
         <div class="rainpoint">
-          <a  href="#"><img class="img-fluid" src="images/rainstar.png" alt="logo" /></a>
+          <a  href="pharmacist_dashboard.php"><img class="img-fluid" src="images/rainstar.png" alt="logo" /></a>
         </div>
         <span class="cnam">RainStar</span>
         <ul class="nav">
           
           <li class="nav-item menu-items">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="pharmacist_dashboard.php">
               <span class="menu-icon">
                 <i class="mdi mdi-speedometer"></i>
               </span>
@@ -21,16 +21,17 @@
           </li>
 
           <li class="nav-item menu-items">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="registration_form.php">
               <span class="menu-icon">
                 <i class="mdi mdi-speedometer"></i>
               </span>
-              <span class="menu-title">Registration</span>
+              <span class="menu-title">Add User</span>
             </a>
+           
           </li>
 
           <li class="nav-item menu-items">
-            <a class="nav-link" href="saleform.php">
+            <a class="nav-link" href="sale_form.php">
               <span class="menu-icon">
                 <i class="mdi mdi-speedometer"></i>
               </span>
@@ -39,7 +40,16 @@
           </li>
 
           <li class="nav-item menu-items">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="sale_return.php">
+              <span class="menu-icon">
+                <i class="mdi mdi-speedometer"></i>
+              </span>
+              <span class="menu-title">Sale_Return</span>
+            </a>
+          </li>
+
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="purchase_form.php">
               <span class="menu-icon">
                 <i class="mdi mdi-speedometer"></i>
               </span>
@@ -48,13 +58,15 @@
           </li>
 
           <li class="nav-item menu-items">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="purchase_return.php">
               <span class="menu-icon">
                 <i class="mdi mdi-speedometer"></i>
               </span>
-              <span class="menu-title">Return</span>
+              <span class="menu-title">Purchase_Return</span>
             </a>
           </li>
+
+          
          
         </ul>
       </nav>

@@ -5,91 +5,102 @@
   <title>Login Form</title>
   <style>
     * {
-      box-sizing: border-box;
-      font-family: 'Segoe UI', sans-serif;
-      margin: 0;
-      padding: 0;
-    }
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0;
+  }
 
-    body {
-      background: black;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
+  body {
+    background: linear-gradient(135deg, #0d1117, #1a1f2b);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
 
-    .login-box {
-      background: #001233;
-      padding: 30px 25px;
-      border-radius: 10px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-      width: 100%;
-      max-width: 400px;
-    }
+  .login-box {
+    background: #161b22;
+    padding: 30px 25px;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    width: 100%;
+    max-width: 400px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
 
-    .login-box h2 {
-      text-align: center;
-      margin-bottom: 25px;
-      color: #333;
-    }
+  .login-box h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #e6edf3;
+    font-weight: 500;
+  }
 
-    .form-group {
-      margin-bottom: 20px;
-    }
+  .form-group {
+    margin-bottom: 20px;
+  }
 
-    label {
-      display: block;
-      font-weight: 600;
-      margin-bottom: 6px;
-      color: #555;
-    }
+  label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 6px;
+    color: #a1b0c4;
+    font-size: 14px;
+  }
 
-    input, select {
-      width: 100%;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      font-size: 14px;
-      transition: border-color 0.3s;
-    }
+  input, select {
+    width: 100%;
+    padding: 10px;
+    background: #0d1117;
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    font-size: 14px;
+    color: #e6edf3;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
 
-    input:focus, select:focus {
-      border-color: #007BFF;
-      outline: none;
-    }
+  input:focus, select:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 8px rgba(59, 130, 246, 0.4);
+    outline: none;
+  }
 
-    .submit-btn {
-      width: 100%;
-      padding: 10px;
-      background-color: #007BFF;
-      border: none;
-      color: white;
-      font-size: 16px;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
+  .submit-btn {
+    width: 100%;
+    padding: 10px;
+    background: #3b82f6;
+    border: none;
+    color: white;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: transform 0.2s, background 0.3s, box-shadow 0.3s;
+  }
 
-    .submit-btn:hover {
-      background-color: #0056b3;
-    }
+  .submit-btn:hover {
+    transform: translateY(-1px);
+    background: #60a5fa;
+    box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+  }
 
-    .links {
-      text-align: center;
-      margin-top: 15px;
-    }
+  .links {
+    text-align: center;
+    margin-top: 15px;
+  }
 
-    .links a {
-      margin: 0 10px;
-      text-decoration: none;
-      color: #007BFF;
-      font-size: 14px;
-    }
+  .links a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #3b82f6;
+    font-size: 14px;
+    transition: color 0.2s;
+  }
 
-    .links a:hover {
-      text-decoration: underline;
-    }
+  .links a:hover {
+    color: #60a5fa;
+    text-decoration: underline;
+  }
   </style>
 </head>
 <body>
@@ -173,7 +184,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($dbRole == 'pharmacist') {
                 header("Location: pharmacist_dashboard.php");
             } elseif ($dbRole == 'admin') {
-                header("Location: admin_dashboard.php");
+                header("Location: pharmacist_dashboard.php");
             }
             exit;
         } else {

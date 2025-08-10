@@ -1,3 +1,16 @@
+<?php
+// blank-page.php
+// Keeps header, sidebar, navbar and footer. Content area is intentionally empty.
+include "includes/header.php";
+include "includes/sidebar.php";
+?>
+<div class="container-fluid page-body-wrapper">
+  <?php include "includes/navbar.php"; ?>
+
+  <div class="main-panel">
+    <div class="content-wrapper">
+<!-- contant area start----------------------------------------------------------------------------->
+   
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,11 +19,10 @@
   <style>
    body {
   background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
-  display: flex;
+  /* display: flex;
   justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  padding: 20px;
+  align-items: center; */
+  /* min-height: 100vh; */
   font-family: 'Segoe UI', sans-serif;
   color: #e0e0e0;
 }
@@ -21,7 +33,7 @@
   padding: 40px 30px;
   border-radius: 14px;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
-  max-width: 800px;
+  max-width: 1000px;
   width: 100%;
   border: 1px solid rgba(255, 255, 255, 0.05);
 }
@@ -30,7 +42,8 @@
   text-align: center;
   margin-bottom: 30px;
   font-size: 1.8rem;
-  color: #ffffff;
+  color: #00a6fb;
+  font-weight: bold;
   letter-spacing: 0.5px;
 }
 
@@ -126,7 +139,7 @@ input:focus, select:focus {
 <body>
 
   <div class="reg-box">
-  <h2>Pharmacist Registration</h2>
+  <h2>User Registration</h2>
     <form action="#" method="POST" enctype="multipart/form-data">
     
       <div class="form-group">
@@ -253,3 +266,10 @@ if (in_array($imageExt, $allowedExt) && $_FILES['image']['size'] <= 2 * 1024 * 1
 $conn->close();
 ?>
 
+
+<!-- contant area end----------------------------------------------------------------------------->
+    </div> <!-- content-wrapper ends -->
+
+    <?php include "includes/footer.php"; ?>
+  </div> <!-- main-panel ends -->
+</div> <!-- page-body-wrapper ends -->

@@ -1,4 +1,16 @@
-<!DOCTYPE html>
+<?php
+// blank-page.php
+// Keeps header, sidebar, navbar and footer. Content area is intentionally empty.
+include "includes/header.php";
+include "includes/sidebar.php";
+?>
+<div class="container-fluid page-body-wrapper">
+  <?php include "includes/navbar.php"; ?>
+
+  <div class="main-panel">
+    <div class="content-wrapper">
+
+    <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -14,7 +26,7 @@
       font-family: 'Segoe UI', sans-serif;
       background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
       color: #e0e0e0;
-      padding: 40px;
+      /* padding: 40px; */
     }
 
     .form-container {
@@ -248,3 +260,9 @@
 </body>
 </html>
 
+
+    </div> <!-- content-wrapper ends -->
+
+    <?php include "includes/footer.php"; ?>
+  </div> <!-- main-panel ends -->
+</div> <!-- page-body-wrapper ends -->

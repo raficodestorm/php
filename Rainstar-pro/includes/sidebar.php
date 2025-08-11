@@ -6,7 +6,7 @@
           <a class="sidebar-brand brand-logo" href="#"><img src="images/rainstar.png" alt="logo" /></a>
         </div> -->
         <div class="rainpoint">
-          <a  href="pharmacist_dashboard.php"><img class="img-fluid" src="images/rainstar.png" alt="logo" /></a>
+          <a  href="pharmacist_dashboard.php"><img class="img-fluid" src="../images/rainstar.png" alt="logo" /></a>
         </div>
         <span class="cnam">RainStar</span>
         <ul class="nav">

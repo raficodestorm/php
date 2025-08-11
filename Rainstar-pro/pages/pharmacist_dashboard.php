@@ -1,8 +1,8 @@
-<?php  include "includes/header.php";  ?>
-<?php include "includes/sidebar.php"; ?>
+<?php  include "../includes/header.php";  ?>
+<?php include "../includes/sidebar.php"; ?>
       <!-- partial -->
       <div class="container-fluid page-body-wrapper">
-       <?php include "includes/navbar.php"; ?>
+       <?php include "../includes/navbar.php"; ?>
         <!-- partial -->
         <div class="main-panel">
           <div class="content-wrapper">
@@ -646,4 +646,4 @@
             </div>
           </div>
           <!-- content-wrapper ends -->
-         <?php include "includes/footer.php"  ?>
+         <?php include "../includes/footer.php"  ?>

@@ -1,33 +1,36 @@
 <?php
 // blank-page.php
 // Keeps header, sidebar, navbar and footer. Content area is intentionally empty.
-include "includes/header.php";
-include "includes/sidebar.php";
+include "../includes/header.php";
+include "../includes/sidebar.php";
 ?>
 <div class="container-fluid page-body-wrapper">
-  <?php include "includes/navbar.php"; ?>
+  <?php include "../includes/navbar.php"; ?>
 
   <div class="main-panel">
     <div class="content-wrapper">
-<!-- contant area start----------------------------------------------------------------------------->
-   
-<!DOCTYPE html>
+
+    <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Purchase Form</title>
+  <title>Sales Form</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
     body {
       font-family: 'Segoe UI', sans-serif;
       background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
       color: #e0e0e0;
-    
+      /* padding: 40px; */
     }
 
     .form-container {
-      background: rgba(30, 30, 30, 0.85);
+      background: #12151e;
       backdrop-filter: blur(12px);
       border-radius: 14px;
       padding: 30px 40px;
@@ -41,6 +44,7 @@ include "includes/sidebar.php";
       text-align: center;
       margin-bottom: 25px;
       color: #ffffff;
+      letter-spacing: 0.5px;
     }
 
     .form-group {
@@ -80,11 +84,11 @@ include "includes/sidebar.php";
       align-items: end;
     }
 
-    .add-btn {
+    .add-medicine-btn {
       margin-top: 10px;
       padding: 10px 18px;
       border: none;
-      background: linear-gradient(135deg, #4dabf7, #339af0);
+      background: linear-gradient(135deg, #27ae60, #1e8449);
       color: white;
       border-radius: 8px;
       cursor: pointer;
@@ -92,13 +96,13 @@ include "includes/sidebar.php";
       transition: all 0.3s ease;
     }
 
-    .add-btn:hover {
-      background: linear-gradient(135deg, #74c0fc, #4dabf7);
+    .add-medicine-btn:hover {
+      background: linear-gradient(135deg, #2ecc71, #239b56);
       transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(77, 171, 247, 0.4);
+      box-shadow: 0 4px 12px rgba(46, 204, 113, 0.4);
     }
 
-    .submit-btn {
+    .submit-sale {
       background: linear-gradient(135deg, #4dabf7, #1c7ed6);
       color: white;
       padding: 12px 20px;
@@ -111,10 +115,10 @@ include "includes/sidebar.php";
       transition: all 0.3s ease;
     }
 
-    .submit-btn:hover {
-      background: linear-gradient(135deg, #74c0fc, #4dabf7);
+    .submit-sale:hover {
+      background: linear-gradient(135deg, #339af0, #1864ab);
       transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(77, 171, 247, 0.4);
+      box-shadow: 0 4px 12px rgba(52, 152, 219, 0.4);
     }
 
     .section-title {
@@ -141,6 +145,7 @@ include "includes/sidebar.php";
       transform: scale(1.05);
     }
 
+    /* Mobile: single column */
     @media (max-width: 600px) {
       .grid-row {
         grid-template-columns: 1fr;
@@ -150,122 +155,114 @@ include "includes/sidebar.php";
 </head>
 <body>
   <div class="form-container">
-    <h2>Purchase Form</h2>
-    <form id="purchaseForm">
+    <h2>Pharmacy Sales Form</h2>
+    <form id="salesForm">
       <div class="form-group">
-        <label for="invoice">Purchase Invoice Number</label>
-        <input type="text" name="invoice_number" required placeholder="Enter purchase invoice number">
-      </div>
-
-      <div class="form-group">
-        <label for="supplier">Select Supplier</label>
-        <select name="supplier_id" required>
-          <option value="" disabled selected hidden>Select a supplier</option>
-          <option value="1">ABC Pharma</option>
-          <option value="2">XYZ Distributors</option>
+        <label for="customer">Select Customer</label>
+        <select name="customer_id" required>
+          <option value="" disabled selected hidden>Select a medicine</option>
+          <option value="1">John Doe</option>
+          <option value="2">Jane Smith</option>
         </select>
       </div>
 
       <div class="form-group">
-        <label for="purchase-date">Purchase Date</label>
-        <input type="date" id="purchase-date" name="purchase_date" required>
+        <label for="pharmacist">Pharmacist</label>
+        <select name="pharmacist_id" required>
+          <option value="1">Admin</option>
+          <option value="2">Pharmacist</option>
+        </select>
       </div>
 
-      <div class="section-title">Purchased Items</div>
+      <div class="section-title">Medicines</div>
 
-      <div id="purchase-items-container"></div>
+      <div id="medicine-container"></div>
 
-      <button type="button" class="add-btn" onclick="addPurchaseRow()">+ Add Item</button>
+      <button type="button" class="add-medicine-btn" onclick="addMedicineRow()">+ Add Another Medicine</button>
 
       <div class="form-group" style="margin-top: 30px;">
-        <label for="total-purchase">Total Purchase Amount</label>
-        <input type="number" id="total-purchase" name="total_purchase" readonly value="0.00">
+        <label for="grand-total">Grand Total</label>
+        <input type="number" id="grand-total" name="grand_total" readonly value="0.00">
       </div>
 
-      <button type="submit" class="submit-btn">Confirm Purchase</button>
+      <button type="submit" class="submit-sale">Confirm Sale</button>
     </form>
   </div>
 
   <script>
-    function addPurchaseRow() {
-      const container = document.getElementById('purchase-items-container');
+    function addMedicineRow() {
+      const container = document.getElementById('medicine-container');
 
       const row = document.createElement('div');
       row.className = 'grid-row';
       row.innerHTML = `
         <div class="form-group">
           <label>Medicine</label>
-          <select name="stock_id[]" required onchange="updateFromSelection(this)">
-            <option value="1" data-price="8">NAPA (Supplier Price)</option>
-            <option value="2" data-price="10">Maxpro (Supplier Price)</option>
+          <select name="stock_id[]" required onchange="calculateRowTotal(this)">
+            <option value="1" data-price="10">NAPA</option>
+            <option value="2" data-price="12">Maxpro</option>
           </select>
         </div>
 
         <div class="form-group">
           <label>Quantity</label>
-          <input type="number" name="quantity[]" min="1" value="1" oninput="recalculateRow(this)">
+          <input type="number" name="quantity[]" min="1" value="1" oninput="calculateRowTotal(this)">
         </div>
 
         <div class="form-group">
           <label>Unit Price</label>
-          <input type="number" name="unit_price[]" step="0.01" value="8.00" oninput="recalculateRow(this)">
+          <input type="number" name="unit_price[]" step="0.01" value="10.00" readonly>
         </div>
 
         <div class="form-group">
           <label>Total</label>
-          <input type="number" name="total[]" step="0.01" value="8.00" readonly>
+          <input type="number" name="total[]" step="0.01" value="10.00" readonly>
         </div>
 
         <div class="form-group">
           <label>&nbsp;</label>
-          <button type="button" class="delete-btn" onclick="removeRow(this)">❌</button>
+          <button type="button" class="delete-btn" onclick="removeMedicineRow(this)">❌</button>
         </div>
       `;
 
       container.appendChild(row);
-      updatePurchaseTotal();
+      updateGrandTotal();
     }
 
-    function updateFromSelection(select) {
-      const row = select.closest('.grid-row');
-      const price = select.options[select.selectedIndex].dataset.price;
-      row.querySelector('[name="unit_price[]"]').value = price;
-      recalculateRow(select);
-    }
-
-    function recalculateRow(elem) {
+    function calculateRowTotal(elem) {
       const row = elem.closest('.grid-row');
-      const qty = parseFloat(row.querySelector('[name="quantity[]"]').value) || 0;
-      const price = parseFloat(row.querySelector('[name="unit_price[]"]').value) || 0;
+      const qty = row.querySelector('[name="quantity[]"]').value;
+      const select = row.querySelector('[name="stock_id[]"]');
+      const price = select.options[select.selectedIndex].dataset.price;
+
+      row.querySelector('[name="unit_price[]"]').value = price;
       row.querySelector('[name="total[]"]').value = (qty * price).toFixed(2);
-      updatePurchaseTotal();
+
+      updateGrandTotal();
     }
 
-    function updatePurchaseTotal() {
+    function updateGrandTotal() {
       let total = 0;
       document.querySelectorAll('[name="total[]"]').forEach(input => {
         total += parseFloat(input.value) || 0;
       });
-      document.getElementById('total-purchase').value = total.toFixed(2);
+      document.getElementById('grand-total').value = total.toFixed(2);
     }
 
-    function removeRow(button) {
-      button.closest('.grid-row').remove();
-      updatePurchaseTotal();
+    function removeMedicineRow(button) {
+      const row = button.closest('.grid-row');
+      row.remove();
+      updateGrandTotal();
     }
 
-    window.onload = () => {
-      // Auto-set date to today
-      const today = new Date().toISOString().split('T')[0];
-      document.getElementById('purchase-date').value = today;
-      addPurchaseRow();
-    }
+    window.onload = () => addMedicineRow();
   </script>
 </body>
 </html>
-<!-- contant area end----------------------------------------------------------------------------->
+
+
     </div> <!-- content-wrapper ends -->
 
-    <?php include "includes/footer.php"; ?>
+    <?php include "../includes/footer.php"; ?>
   </div> <!-- main-panel ends -->
 </div> <!-- page-body-wrapper ends -->

@@ -1,11 +1,11 @@
 <?php
 // blank-page.php
 // Keeps header, sidebar, navbar and footer. Content area is intentionally empty.
-include "includes/header.php";
-include "includes/sidebar.php";
+include "../includes/header.php";
+include "../includes/sidebar.php";
 ?>
 <div class="container-fluid page-body-wrapper">
-  <?php include "includes/navbar.php"; ?>
+  <?php include "../includes/navbar.php"; ?>
 
   <div class="main-panel">
     <div class="content-wrapper">
@@ -31,7 +31,7 @@ include "includes/sidebar.php";
     }
 
     .form-container {
-      background: rgba(30, 30, 30, 0.85);
+      background: #12151e;
       backdrop-filter: blur(12px);
       border-radius: 14px;
       padding: 30px 40px;
@@ -263,6 +263,6 @@ include "includes/sidebar.php";
 <!-- contant area end----------------------------------------------------------------------------->
     </div> <!-- content-wrapper ends -->
 
-    <?php include "includes/footer.php"; ?>
+    <?php include "../includes/footer.php"; ?>
   </div> <!-- main-panel ends -->
 </div> <!-- page-body-wrapper ends -->

@@ -52,7 +52,7 @@
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item preview-item">
                     <div class="preview-thumbnail">
-                      <img src="images/face2.jpg" alt="image" class="rounded-circle profile-pic">
+                      <img src="../images/face2.jpg" alt="image" class="rounded-circle profile-pic">
                     </div>
                     <div class="preview-item-content">
                       <p class="preview-subject ellipsis mb-1">Cregh send you a message</p>
@@ -62,7 +62,7 @@
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item preview-item">
                     <div class="preview-thumbnail">
-                      <img src="images/face3.jpg" alt="image" class="rounded-circle profile-pic">
+                      <img src="../images/face3.jpg" alt="image" class="rounded-circle profile-pic">
                     </div>
                     <div class="preview-item-content">
                       <p class="preview-subject ellipsis mb-1">Profile picture updated</p>
@@ -127,7 +127,7 @@
               <li class="nav-item dropdown">
                 <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown">
                   <div class="navbar-profile">
-                    <img class="img-xs rounded-circle" src="images/rafi.png" alt="">
+                    <img class="img-xs rounded-circle" src="../images/rafi.png" alt="">
                     <p class="mb-0 d-none d-sm-block navbar-profile-name">S A Rafi</p>
                     <i class="mdi mdi-menu-down d-none d-sm-block"></i>
                   </div>

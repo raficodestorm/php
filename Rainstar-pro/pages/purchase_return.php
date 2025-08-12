@@ -31,7 +31,7 @@ include "../includes/sidebar.php";
     }
 
     .form-container {
-      background: #12151e;
+      background: #191d24;
       backdrop-filter: blur(12px);
       border-radius: 14px;
       padding: 30px 40px;

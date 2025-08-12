@@ -27,7 +27,10 @@
               </span>
               <span class="menu-title">Add User</span>
             </a>
-           
+            <ul>
+              <li><a href="registration_form.php"></a></li>
+              <li><a href="add_customer.php"></a></li>
+            </ul>
           </li>
 
           <li class="nav-item menu-items">

@@ -48,7 +48,7 @@ include "../includes/sidebar.php";
       color: #bdbdbd;
     }
 
-    input, select, textarea {
+    input, select {
       padding: 10px 14px;
       border-radius: 8px;
       border: 1px solid #333;
@@ -60,7 +60,7 @@ include "../includes/sidebar.php";
       box-sizing: border-box;
     }
 
-    input:focus, select:focus, textarea:focus {
+    input:focus, select:focus {
       border-color: #4dabf7;
       outline: none;
       box-shadow: 0 0 8px rgba(77, 171, 247, 0.5);
@@ -76,7 +76,7 @@ include "../includes/sidebar.php";
     }
 
     /* Header for return items */
-    #return-items-header {
+    #purchase-items-header {
       display: grid;
       grid-template-columns: 2fr 1.5fr 1fr 1fr 1fr 50px;
       gap: 20px;
@@ -87,7 +87,7 @@ include "../includes/sidebar.php";
     }
 
     /* Container for all return item rows */
-    #return-items-container {
+    #purchase-items-container {
       display: flex;
       flex-direction: column;
       gap: 12px;
@@ -95,7 +95,7 @@ include "../includes/sidebar.php";
     }
 
     /* Each return item row is a grid with 6 columns */
-    .return-item-row {
+    .purchase-item-row {
       display: grid;
       grid-template-columns: 2fr 1.5fr 1fr 1fr 1fr 50px;
       gap: 20px;
@@ -103,7 +103,7 @@ include "../includes/sidebar.php";
     }
 
     /* Remove margin bottom inside form-groups of return items */
-    #return-items-container .form-group {
+    #purchase-items-container .form-group {
       margin-bottom: 0;
     }
 
@@ -168,19 +168,19 @@ include "../includes/sidebar.php";
 
 /* Responsive adjustments */
 @media (max-width: 720px) {
-  #return-items-header,
-  .return-item-row {
+  #purchase-items-header,
+  .purchase-item-row {
     grid-template-columns: 1fr; /* single column layout */
     gap: 15px;
   }
 
   /* Label and input stack vertically */
-  .return-item-row .form-group {
+  .purchase-item-row .form-group {
     width: 100%;
   }
 
   /* Align labels properly */
-  #return-items-header > div {
+  #purchase-items-header > div {
     display: none; /* hide the header grid labels on mobile, optional */
   }
 }
@@ -224,14 +224,9 @@ include "../includes/sidebar.php";
         </select>
       </div>
 
-      <div class="form-group">
-        <label for="reason">Reason for Return</label>
-        <textarea name="reason" id="reason" rows="3" placeholder="Describe the reason for return" required></textarea>
-      </div>
+      <div class="section-title">Purchase Items</div>
 
-      <div class="section-title">Return Items</div>
-
-      <div id="return-items-header">
+      <div id="purchase-items-header">
         <div>Medicine</div>
         <div>Expiry Date</div>
         <div>Quantity</div>
@@ -240,27 +235,27 @@ include "../includes/sidebar.php";
         <div>&nbsp;</div>
       </div>
 
-      <div id="return-items-container">
-        <!-- Return item rows go here -->
+      <div id="purchase-items-container">
+        <!-- purchase item rows go here -->
       </div>
 
       <button type="button" class="add-btn" onclick="addReturnRow()">+ Add Item</button>
 
       <div class="form-group" style="margin-top: 30px;">
-        <label for="total-refund">Total Refund Amount</label>
-        <input type="number" id="total-refund" name="total_refund" readonly value="0.00" />
+        <label for="total-refund">Total Amount</label>
+        <input type="number" id="total-amount" name="total_refund" readonly value="0.00" />
       </div>
 
-      <button type="submit" class="submit-btn">Confirm Purchase Return</button>
+      <button type="submit" class="submit-btn">Confirm Purchase</button>
     </form>
   </div>
 
   <script>
     function addReturnRow() {
-      const container = document.getElementById('return-items-container');
+      const container = document.getElementById('purchase-items-container');
 
       const row = document.createElement('div');
-      row.className = 'return-item-row';
+      row.className = 'purchase-item-row';
 
       row.innerHTML = `
         <div class="form-group">
@@ -291,7 +286,7 @@ include "../includes/sidebar.php";
     }
 
     function calculateRefund(elem) {
-      const row = elem.closest('.return-item-row');
+      const row = elem.closest('.purchase-item-row');
 
       const qtyInput = row.querySelector('input[name="quantity[]"]');
       const qty = parseFloat(qtyInput.value) || 0;
@@ -313,11 +308,11 @@ include "../includes/sidebar.php";
       document.querySelectorAll('input[name="total[]"]').forEach(input => {
         total += parseFloat(input.value) || 0;
       });
-      document.getElementById('total-refund').value = total.toFixed(2);
+      document.getElementById('total-amount').value = total.toFixed(2);
     }
 
     function removeRow(button) {
-      const row = button.closest('.return-item-row');
+      const row = button.closest('.purchase-item-row');
       if (row) {
         row.remove();
         updateRefundTotal();

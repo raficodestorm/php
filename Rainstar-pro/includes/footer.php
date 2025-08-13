@@ -32,7 +32,7 @@
     </script>
 
 
-    <script src="js/custom.js"></script>
+    <script src="../assets/js/custom.js"></script>
     <!-- plugins:js -->
     <script src="../assets/js/vendor.bundle.base.js"></script>
     <!-- endinject -->

@@ -142,20 +142,7 @@
 <?php
 session_start();
 
-// Database connection settings
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "rainstar_pharma";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check DB connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
+include "includes/dbconnection.php";
 // Process login form
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = trim($_POST['username']);

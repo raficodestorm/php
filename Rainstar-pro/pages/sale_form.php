@@ -171,7 +171,7 @@ include "../includes/sidebar.php";
 
       <div id="medicine-container"></div>
 
-      <button type="button" class="add-medicine-btn" onclick="addMedicineRow()">+ Add Another Medicine</button>
+      <button type="button" class="add-medicine-btn" onclick="addMedicineRow()">+ Add Medicine</button>
 
       <div class="form-group" style="margin-top: 30px;">
         <label for="grand-total">Grand Total</label>
@@ -183,73 +183,105 @@ include "../includes/sidebar.php";
   </div>
 
   <script>
-    function addMedicineRow() {
-      const container = document.getElementById('medicine-container');
+class SalesForm {
+  constructor(formId, medicineContainerId, grandTotalId) {
+    this.form = document.getElementById(formId);
+    this.container = document.getElementById(medicineContainerId);
+    this.grandTotal = document.getElementById(grandTotalId);
 
-      const row = document.createElement('div');
-      row.className = 'grid-row';
-      row.innerHTML = `
-        <div class="form-group">
-          <label>Medicine</label>
-          <select name="stock_id[]" required onchange="calculateRowTotal(this)">
-            <option value="1" data-price="10">NAPA</option>
-            <option value="2" data-price="12">Maxpro</option>
-          </select>
-        </div>
+    this.init();
+  }
 
-        <div class="form-group">
-          <label>Quantity</label>
-          <input type="number" name="quantity[]" min="1" value="1" oninput="calculateRowTotal(this)">
-        </div>
+  init() {
+    // Add the first medicine row on page load
+    this.addMedicineRow();
 
-        <div class="form-group">
-          <label>Unit Price</label>
-          <input type="number" name="unit_price[]" step="0.01" value="10.00" readonly>
-        </div>
+    // Optional: handle form submit
+    this.form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      alert("Sale confirmed!"); 
+      // Here you could do an AJAX call or regular submit
+    });
+  }
 
-        <div class="form-group">
-          <label>Total</label>
-          <input type="number" name="total[]" step="0.01" value="10.00" readonly>
-        </div>
+  addMedicineRow() {
+    const row = document.createElement('div');
+    row.className = 'grid-row';
+    row.innerHTML = `
+      <div class="form-group">
+        <label>Medicine</label>
+        <select name="stock_id[]" required>
+          <option value="1" data-price="10">NAPA</option>
+          <option value="2" data-price="12">Maxpro</option>
+        </select>
+      </div>
 
-        <div class="form-group">
-          <label>&nbsp;</label>
-          <button type="button" class="delete-btn" onclick="removeMedicineRow(this)">❌</button>
-        </div>
-      `;
+      <div class="form-group">
+        <label>Quantity</label>
+        <input type="number" name="quantity[]" min="1" value="1">
+      </div>
 
-      container.appendChild(row);
-      updateGrandTotal();
-    }
+      <div class="form-group">
+        <label>Unit Price</label>
+        <input type="number" name="unit_price[]" step="0.01" value="10.00" readonly>
+      </div>
 
-    function calculateRowTotal(elem) {
-      const row = elem.closest('.grid-row');
-      const qty = row.querySelector('[name="quantity[]"]').value;
-      const select = row.querySelector('[name="stock_id[]"]');
-      const price = select.options[select.selectedIndex].dataset.price;
+      <div class="form-group">
+        <label>Total</label>
+        <input type="number" name="total[]" step="0.01" value="10.00" readonly>
+      </div>
 
-      row.querySelector('[name="unit_price[]"]').value = price;
-      row.querySelector('[name="total[]"]').value = (qty * price).toFixed(2);
+      <div class="form-group">
+        <label>&nbsp;</label>
+        <button type="button" class="delete-btn">❌</button>
+      </div>
+    `;
 
-      updateGrandTotal();
-    }
+    // Event listeners for this row
+    row.querySelector('[name="stock_id[]"]').addEventListener('change', () => this.calculateRowTotal(row));
+    row.querySelector('[name="quantity[]"]').addEventListener('input', () => this.calculateRowTotal(row));
+    row.querySelector('.delete-btn').addEventListener('click', () => this.removeMedicineRow(row));
 
-    function updateGrandTotal() {
-      let total = 0;
-      document.querySelectorAll('[name="total[]"]').forEach(input => {
-        total += parseFloat(input.value) || 0;
-      });
-      document.getElementById('grand-total').value = total.toFixed(2);
-    }
+    this.container.appendChild(row);
+    this.updateGrandTotal();
+  }
 
-    function removeMedicineRow(button) {
-      const row = button.closest('.grid-row');
-      row.remove();
-      updateGrandTotal();
-    }
+  calculateRowTotal(row) {
+    const qty = parseFloat(row.querySelector('[name="quantity[]"]').value) || 0;
+    const select = row.querySelector('[name="stock_id[]"]');
+    const price = parseFloat(select.options[select.selectedIndex].dataset.price) || 0;
 
-    window.onload = () => addMedicineRow();
-  </script>
+    row.querySelector('[name="unit_price[]"]').value = price.toFixed(2);
+    row.querySelector('[name="total[]"]').value = (qty * price).toFixed(2);
+
+    this.updateGrandTotal();
+  }
+
+  updateGrandTotal() {
+    let total = 0;
+    this.container.querySelectorAll('[name="total[]"]').forEach(input => {
+      total += parseFloat(input.value) || 0;
+    });
+    this.grandTotal.value = total.toFixed(2);
+  }
+
+  removeMedicineRow(row) {
+    row.remove();
+    this.updateGrandTotal();
+  }
+}
+
+// Initialize after DOM is loaded
+window.addEventListener('DOMContentLoaded', () => {
+  const salesForm = new SalesForm('salesForm', 'medicine-container', 'grand-total');
+
+  // Keep your existing button working
+  document.querySelector('.add-medicine-btn').addEventListener('click', () => {
+    salesForm.addMedicineRow();
+  });
+});
+</script>
+
 </body>
 </html>
 
